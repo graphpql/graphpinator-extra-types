@@ -20,6 +20,8 @@ final class PostalCodeTypeTest extends \PHPUnit\Framework\TestCase
     {
         return [
             ['123 4'],
+            ['abc 123 40'],
+            ['123 40 abc'],
             ['123'],
             ['123'],
             ['12'],
