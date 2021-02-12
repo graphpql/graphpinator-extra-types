@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
 class HslType extends \Graphpinator\Type\Type
 {
@@ -10,7 +10,7 @@ class HslType extends \Graphpinator\Type\Type
     protected const DESCRIPTION = 'Hsl type - type representing the HSL color model.';
 
     public function __construct(
-        protected \Graphpinator\Directive\Constraint\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        protected \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();

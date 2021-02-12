@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
 final class MacType extends \Graphpinator\Type\Scalar\ScalarType
 {

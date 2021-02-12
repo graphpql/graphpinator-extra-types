@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
 class RgbInput extends \Graphpinator\Type\InputType
 {
@@ -10,7 +10,7 @@ class RgbInput extends \Graphpinator\Type\InputType
     protected const DESCRIPTION = 'Rgb input - input for the RGB color model.';
 
     public function __construct(
-        protected \Graphpinator\Directive\Constraint\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        protected \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();

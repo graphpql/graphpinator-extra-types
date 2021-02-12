@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
-final class HslaInput extends \Graphpinator\Type\Addon\HslInput
+final class HslaInput extends \Graphpinator\ExtraTypes\HslInput
 {
     protected const NAME = 'HslaInput';
     protected const DESCRIPTION = 'Hsla input - input for the HSL color model with added alpha (transparency).';

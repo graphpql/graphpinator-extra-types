@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
 final class GpsInput extends \Graphpinator\Type\InputType
 {
@@ -10,7 +10,7 @@ final class GpsInput extends \Graphpinator\Type\InputType
     protected const DESCRIPTION = 'Gps input - input for the GPS.';
 
     public function __construct(
-        private \Graphpinator\Directive\Constraint\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        private \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();

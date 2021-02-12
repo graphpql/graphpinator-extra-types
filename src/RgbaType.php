@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
-final class RgbaType extends \Graphpinator\Type\Addon\RgbType
+final class RgbaType extends \Graphpinator\ExtraTypes\RgbType
 {
     protected const NAME = 'Rgba';
     protected const DESCRIPTION = 'Rgba type - type representing the RGB color model with added alpha (transparency).';

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
 final class GpsType extends \Graphpinator\Type\Type
 {
@@ -10,7 +10,7 @@ final class GpsType extends \Graphpinator\Type\Type
     protected const DESCRIPTION = 'Gps type - latitude and longitude.';
 
     public function __construct(
-        private \Graphpinator\Directive\Constraint\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        private \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();

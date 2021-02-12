@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace Graphpinator\ExtraTypes\Tests\Unit;
+
+final class VoidTypeTest extends \PHPUnit\Framework\TestCase
+{
+    public function simpleDataProvider() : array
+    {
+        return [
+            [null],
+        ];
+    }
+
+    public function invalidDataProvider() : array
+    {
+        return [
+            [true],
+            [420],
+            [420.42],
+            ['beetlejuice'],
+            [[]],
+        ];
+    }
+
+    /**
+     * @dataProvider simpleDataProvider
+     * @param void $rawValue
+     */
+    public function testValidateValue(mixed $rawValue) : void
+    {
+        $void = new \Graphpinator\ExtraTypes\VoidType();
+        $value = $void->createInputedValue($rawValue);
+
+        self::assertSame($void, $value->getType());
+        self::assertSame($rawValue, $value->getRawValue());
+    }
+
+    /**
+     * @dataProvider invalidDataProvider
+     * @param int|bool|string|float|array $rawValue
+     */
+    public function testValidateValueInvalid(mixed $rawValue) : void
+    {
+        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+
+        $void = new \Graphpinator\ExtraTypes\VoidType();
+        $void->createInputedValue($rawValue);
+    }
+}

@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\Type\Addon;
+namespace Graphpinator\ExtraTypes;
 
-final class HslaType extends \Graphpinator\Type\Addon\HslType
+final class HslaType extends \Graphpinator\ExtraTypes\HslType
 {
     protected const NAME = 'Hsla';
     protected const DESCRIPTION = 'Hsla type - type representing the HSL color model with added alpha (transparency).';
