@@ -53,7 +53,7 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(\stdClass $rawValue) : void
     {
         $gps = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Gps');
-        $value = $gps->createResolvedValue($rawValue);
+        $value = $gps->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($gps, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -68,6 +68,6 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $gps = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Gps');
-        $gps->createResolvedValue($rawValue);
+        $gps->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

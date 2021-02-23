@@ -43,7 +43,7 @@ final class PointTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(\stdClass $rawValue) : void
     {
         $point = new \Graphpinator\ExtraTypes\PointType();
-        $value = $point->createResolvedValue($rawValue);
+        $value = $point->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($point, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -58,6 +58,6 @@ final class PointTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $point = new \Graphpinator\ExtraTypes\PointType();
-        $point->createResolvedValue($rawValue);
+        $point->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

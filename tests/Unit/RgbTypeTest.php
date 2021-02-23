@@ -49,7 +49,7 @@ final class RgbTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue($rawValue) : void
     {
         $rgb = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgb');
-        $value = $rgb->createResolvedValue($rawValue);
+        $value = $rgb->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($rgb, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -64,6 +64,6 @@ final class RgbTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $rgb = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgb');
-        $rgb->createResolvedValue($rawValue);
+        $rgb->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }
