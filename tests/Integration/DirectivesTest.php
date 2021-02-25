@@ -211,6 +211,7 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @dataProvider simpleDataProvider
      * @dataProvider edgeValuesDataProvider
      * @param Json $request
      * @param Json $expected
