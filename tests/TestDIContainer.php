@@ -12,6 +12,46 @@ final class TestDIContainer
     private static ?\Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $accessor = null;
     private static ?\Graphpinator\Container\Container $container = null;
 
+    public static function getTypeContainer() : \Graphpinator\Container\Container
+    {
+        return new \Graphpinator\Container\SimpleContainer([
+            'Any' => self::getType('Any'),
+            'DateTime' => self::getType('DateTime'),
+            'Date' => self::getType('Date'),
+            'EmailAddress' => self::getType('EmailAddress'),
+            'Hsla' => self::getType('Hsla'),
+            'HslaInput' => self::getType('HslaInput'),
+            'Hsl' => self::getType('Hsl'),
+            'HslInput' => self::getType('HslInput'),
+            'Ipv4' => self::getType('Ipv4'),
+            'Ipv6' => self::getType('Ipv6'),
+            'Json' => self::getType('Json'),
+            'Mac' => self::getType('Mac'),
+            'PhoneNumber' => self::getType('PhoneNumber'),
+            'PostalCode' => self::getType('PostalCode'),
+            'Rgba' => self::getType('Rgba'),
+            'RgbaInput' => self::getType('RgbaInput'),
+            'Rgb' => self::getType('Rgb'),
+            'RgbInput' => self::getType('RgbInput'),
+            'Time' => self::getType('Time'),
+            'Url' => self::getType('Url'),
+            'Void' => self::getType('Void'),
+            'Upload' => self::getType('Upload'),
+            'Gps' => self::getType('Gps'),
+            'GpsInput' => self::getType('GpsInput'),
+            'Point' => self::getType('Point'),
+            'PointInput' => self::getType('PointInput'),
+            'BigInt' => self::getType('BigInt'),
+        ],[
+            'ListConstraintInput' => self::getType('ListConstraintInput'),
+            'stringConstraint' => self::getType('stringConstraint'),
+            'intConstraint' => self::getType('intConstraint'),
+            'floatConstraint' => self::getType('floatConstraint'),
+            'listConstraint' => self::getType('listConstraint'),
+            'objectConstraint' => self::getType('objectConstraint'),
+        ]);
+    }
+
     public static function getType(string $name) : object
     {
         if (\array_key_exists($name, self::$types)) {
@@ -19,6 +59,7 @@ final class TestDIContainer
         }
 
         self::$types[$name] = match ($name) {
+            'Any' => new \Graphpinator\ExtraTypes\AnyType(),
             'DateTime' => new \Graphpinator\ExtraTypes\DateTimeType(),
             'Date' => new \Graphpinator\ExtraTypes\DateType(),
             'EmailAddress' => new \Graphpinator\ExtraTypes\EmailAddressType(),

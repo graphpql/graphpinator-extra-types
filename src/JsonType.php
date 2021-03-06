@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class JsonType extends \Graphpinator\Type\Scalar\ScalarType
+final class JsonType extends \Graphpinator\Type\ScalarType
 {
     protected const NAME = 'Json';
     protected const DESCRIPTION = 'Json type - string which contains valid JSON.';

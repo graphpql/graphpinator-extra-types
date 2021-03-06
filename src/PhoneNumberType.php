@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class PhoneNumberType extends \Graphpinator\Type\Scalar\ScalarType
+final class PhoneNumberType extends \Graphpinator\Type\ScalarType
 {
     protected const NAME = 'PhoneNumber';
     protected const DESCRIPTION = 'PhoneNumber type - string which contains valid phone number.'

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class VoidType extends \Graphpinator\Type\Scalar\ScalarType
+final class VoidType extends \Graphpinator\Type\ScalarType
 {
     protected const NAME = 'Void';
     protected const DESCRIPTION = 'Void type - accepts null only.';

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class BigIntType extends \Graphpinator\Type\Scalar\ScalarType
+final class BigIntType extends \Graphpinator\Type\ScalarType
 {
     protected const NAME = 'BigInt';
     protected const DESCRIPTION = 'BigInt addon type (' . \PHP_INT_SIZE * 8 . ' bit)';

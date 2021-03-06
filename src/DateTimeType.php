@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class DateTimeType extends \Graphpinator\Type\Scalar\ScalarType
+final class DateTimeType extends \Graphpinator\Type\ScalarType
 {
     protected const NAME = 'DateTime';
     protected const DESCRIPTION = 'DateTime type - string which contains valid date in "<YYYY>-<MM>-<DD> <HH>:<MM>:<SS>" format.';
