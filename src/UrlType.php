@@ -9,6 +9,13 @@ final class UrlType extends \Graphpinator\Type\ScalarType
     protected const NAME = 'Url';
     protected const DESCRIPTION = 'Url type - string which contains valid URL (Uniform Resource Locator).';
 
+    public function __construct()
+    {
+        $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc3986');
+
+        parent::__construct();
+    }
+
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return \is_string($rawValue)

@@ -9,6 +9,13 @@ final class JsonType extends \Graphpinator\Type\ScalarType
     protected const NAME = 'Json';
     protected const DESCRIPTION = 'Json type - string which contains valid JSON.';
 
+    public function __construct()
+    {
+        $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc7159');
+
+        parent::__construct();
+    }
+
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         try {

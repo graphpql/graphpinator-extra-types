@@ -9,6 +9,13 @@ final class TimeType extends \Graphpinator\Type\ScalarType
     protected const NAME = 'Time';
     protected const DESCRIPTION = 'Time type - string which contains time in "<HH>:<MM>:<SS>" format.';
 
+    public function __construct()
+    {
+        $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6');
+
+        parent::__construct();
+    }
+
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return \is_string($rawValue)
