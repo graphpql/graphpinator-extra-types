@@ -20,7 +20,56 @@ In order to enable the types on your server, the only thing you need to do is to
 
 This package contains following types:
 
+##### Miscellaneous
+
 - `\Graphpinator\ExtraTypes\AnyType`
-    - Any scalar value is accepted = string | int | float | bool.
+    - Any scalar value is accepted = `string | int | float | bool`.
+- `\Graphpinator\ExtraTypes\VoidType`
+    - Only `null`.
 - `\Graphpinator\ExtraTypes\BigIntType`
     - GraphqQL `Int` is required to be 32bit, `BigInt` type bypasses that restriction and allows for 64bits integers.
+
+##### String value
+
+- `\Graphpinator\ExtraTypes\DateTimeType`
+    - Datetime in ISO 8601 format.
+- `\Graphpinator\ExtraTypes\DateType`
+    - Date in ISO 8601 format (the date part).
+- `\Graphpinator\ExtraTypes\TimeType`
+    - Time in ISO 8601 format (the time part).
+- `\Graphpinator\ExtraTypes\JsonType`
+    - Valid JSON.
+- `\Graphpinator\ExtraTypes\EmailAddressType`
+    - Email address.
+- `\Graphpinator\ExtraTypes\UrlType`
+    - URL adress.
+- `\Graphpinator\ExtraTypes\MacType`
+    - MAC identifier.
+- `\Graphpinator\ExtraTypes\IPv4Type`
+    - IPv4 address.
+- `\Graphpinator\ExtraTypes\IPv6Type`
+    - IPv6 address.
+- `\Graphpinator\ExtraTypes\PostalCodeType`
+    - Postal/Zip code.
+- `\Graphpinator\ExtraTypes\PhoneNumberType`
+    - Phone number.
+
+##### Composite types & inputs
+
+- `\Graphpinator\ExtraTypes\PointType` & `\Graphpinator\ExtraTypes\PointInput`
+    - Any pair of x/y values.
+- `\Graphpinator\ExtraTypes\GpsType` & `\Graphpinator\ExtraTypes\GpsInput`
+    - GPS coordinates.
+    - Requires constraint-directives.
+- `\Graphpinator\ExtraTypes\HslType` & `\Graphpinator\ExtraTypes\HslInput`
+    - HSL color scheme.
+    - Requires constraint-directives.
+- `\Graphpinator\ExtraTypes\HslaType` & `\Graphpinator\ExtraTypes\HslaInput`
+    - HSL color scheme with added alpha.
+    - Requires constraint-directives.
+- `\Graphpinator\ExtraTypes\RgbType` & `\Graphpinator\ExtraTypes\RgbInput`
+    - RGB color scheme.
+    - Requires constraint-directives.
+- `\Graphpinator\ExtraTypes\RgbaType` & `\Graphpinator\ExtraTypes\RgbaInput`
+    - RGB color scheme with added alpha.
+    - Requires constraint-directives.
