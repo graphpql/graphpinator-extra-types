@@ -27,7 +27,7 @@ This package contains following types:
 - `\Graphpinator\ExtraTypes\VoidType`
     - Only `null`.
 - `\Graphpinator\ExtraTypes\BigIntType`
-    - GraphqQL `Int` is required to be 32bit, `BigInt` type bypasses that restriction and allows for 64bits integers.
+    - GraphqQL `Int` is required to be 32bit, `BigInt` type bypasses that restriction and allows for 64bit integers.
 
 ##### String value
 
