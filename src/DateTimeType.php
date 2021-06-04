@@ -18,7 +18,10 @@ final class DateTimeType extends \Graphpinator\Type\ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
+        var_dump(\DateTimeImmutable::getLastErrors());
         return \is_string($rawValue)
-            && (\Nette\Utils\DateTime::createFromFormat(\DateTimeInterface::ATOM, $rawValue) instanceof \Nette\Utils\DateTime);
+            && (\Nette\Utils\DateTime::createFromFormat(\DateTimeInterface::ATOM, $rawValue) instanceof \Nette\Utils\DateTime)
+            && \DateTimeImmutable::getLastErrors()['error_count'] === 0
+            && \DateTimeImmutable::getLastErrors()['warning_count'] === 0;
     }
 }

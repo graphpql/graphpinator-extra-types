@@ -10,7 +10,7 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
     {
         return [
             ['2013-04-12T16:40:00-04:00'],
-            ['2008-01-56T66:05:80-01:11'],
+            ['2008-01-30T24:05:60-01:11'],
         ];
     }
 

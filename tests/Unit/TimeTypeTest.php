@@ -10,7 +10,7 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
     {
         return [
             ['T16:40:00-04:00'],
-            ['T66:05:80-01:11'],
+            ['T24:05:60-01:11'],
         ];
     }
 
