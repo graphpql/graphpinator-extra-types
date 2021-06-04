@@ -6,6 +6,8 @@ namespace Graphpinator\ExtraTypes;
 
 final class TimeType extends \Graphpinator\Type\ScalarType
 {
+    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+
     protected const NAME = 'Time';
     protected const DESCRIPTION = 'Time type - string which contains time in ISO8601 format.';
 
@@ -18,14 +20,6 @@ final class TimeType extends \Graphpinator\Type\ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
-        if (!\is_string($rawValue)) {
-            return false;
-        }
-
-        $time = \Nette\Utils\DateTime::createFromFormat('\TH:i:sP', $rawValue);
-        $errors = \DateTimeImmutable::getLastErrors();
-
-        return $time instanceof \Nette\Utils\DateTime
-            && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
+        return \is_string($rawValue) && $this->isValid($rawValue, '\TH:i:sP');
     }
 }

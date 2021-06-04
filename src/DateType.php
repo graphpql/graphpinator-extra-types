@@ -6,6 +6,8 @@ namespace Graphpinator\ExtraTypes;
 
 final class DateType extends \Graphpinator\Type\ScalarType
 {
+    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+
     protected const NAME = 'Date';
     protected const DESCRIPTION = 'Date type - string which contains valid date in "<YYYY>-<MM>-<DD>" format.';
 
@@ -18,14 +20,6 @@ final class DateType extends \Graphpinator\Type\ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
-        if (!\is_string($rawValue)) {
-            return false;
-        }
-
-        $date = \Nette\Utils\DateTime::createFromFormat('Y-m-d', $rawValue);
-        $errors = \DateTimeImmutable::getLastErrors();
-
-        return $date instanceof \Nette\Utils\DateTime
-            && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
+        return \is_string($rawValue) && $this->isValid($rawValue, 'Y-m-d');
     }
 }

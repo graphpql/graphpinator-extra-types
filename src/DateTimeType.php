@@ -6,6 +6,8 @@ namespace Graphpinator\ExtraTypes;
 
 final class DateTimeType extends \Graphpinator\Type\ScalarType
 {
+    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+
     protected const NAME = 'DateTime';
     protected const DESCRIPTION = 'DateTime type - string which contains valid date in ISO8601 format.';
 
@@ -18,14 +20,6 @@ final class DateTimeType extends \Graphpinator\Type\ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
-        if (!\is_string($rawValue)) {
-            return false;
-        }
-
-        $dateTime = \Nette\Utils\DateTime::createFromFormat(\DateTimeInterface::ATOM, $rawValue);
-        $errors = \DateTimeImmutable::getLastErrors();
-
-        return $dateTime instanceof \Nette\Utils\DateTime
-            && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
+        return \is_string($rawValue) && $this->isValid($rawValue, \DateTimeInterface::ATOM);
     }
 }
