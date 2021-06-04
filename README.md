@@ -16,9 +16,9 @@ Install package using composer
 
 In order to enable the types on your server, the only thing you need to do is to put selected types to your `Container`. You may use all or only some.
 
-> Some of the types have special requirement on `infinityloop-dev/graphpinator-constraint-directives`, which needs be enabled first if you with to use according type.
+> Some of the types have special requirements on `infinityloop-dev/graphpinator-constraint-directives`, which needs to be enabled first if you wish to use according type.
 
-This package contains following types:
+This package contains the following types:
 
 ##### Miscellaneous
 
