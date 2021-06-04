@@ -36,6 +36,7 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
         $json = new \Graphpinator\ExtraTypes\JsonType();
         $value = $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc7159', $json->getSpecifiedByUrl());
         self::assertSame($json, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

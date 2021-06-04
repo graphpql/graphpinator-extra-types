@@ -108,6 +108,7 @@ final class UrlTypeTest extends \PHPUnit\Framework\TestCase
         $url = new \Graphpinator\ExtraTypes\UrlType();
         $value = $url->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3986', $url->getSpecifiedByUrl());
         self::assertSame($url, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

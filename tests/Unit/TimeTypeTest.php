@@ -9,8 +9,8 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
     public function simpleDataProvider() : array
     {
         return [
-            ['2013-04-12T16:40:00-04:00'],
-            ['2008-01-56T66:05:80-01:11'],
+            ['T16:40:00-04:00'],
+            ['T66:05:80-01:11'],
         ];
     }
 
@@ -51,6 +51,7 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
         $time = new \Graphpinator\ExtraTypes\TimeType();
         $value = $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $time->getSpecifiedByUrl());
         self::assertSame($time, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

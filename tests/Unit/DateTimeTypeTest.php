@@ -60,6 +60,7 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
         $dateTime = new \Graphpinator\ExtraTypes\DateTimeType();
         $value = $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $dateTime->getSpecifiedByUrl());
         self::assertSame($dateTime, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

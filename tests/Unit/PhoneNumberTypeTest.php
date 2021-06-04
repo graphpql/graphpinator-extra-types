@@ -57,6 +57,7 @@ final class PhoneNumberTypeTest extends \PHPUnit\Framework\TestCase
         $phoneNumber = new \Graphpinator\ExtraTypes\PhoneNumberType();
         $value = $phoneNumber->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3966#section-5.1', $phoneNumber->getSpecifiedByUrl());
         self::assertSame($phoneNumber, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

@@ -44,6 +44,7 @@ final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
         $email = new \Graphpinator\ExtraTypes\EmailAddressType();
         $value = $email->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1', $email->getSpecifiedByUrl());
         self::assertSame($email, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }

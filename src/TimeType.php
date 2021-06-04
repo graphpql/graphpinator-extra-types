@@ -19,6 +19,6 @@ final class TimeType extends \Graphpinator\Type\ScalarType
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return \is_string($rawValue)
-            && \Nette\Utils\DateTime::createFromFormat(\DateTimeInterface::ATOM, $rawValue) instanceof \Nette\Utils\DateTime;
+            && \Nette\Utils\DateTime::createFromFormat('\TH:i:sP', $rawValue) instanceof \Nette\Utils\DateTime;
     }
 }
