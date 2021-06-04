@@ -12,6 +12,7 @@ final class PhoneNumberType extends \Graphpinator\Type\ScalarType
 
     public function __construct()
     {
+        $this->directiveUsages = new \Graphpinator\DirectiveUsage\DirectiveUsageSet();
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc3966#section-5.1');
 
         parent::__construct();

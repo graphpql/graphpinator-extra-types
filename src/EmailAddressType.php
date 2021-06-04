@@ -11,6 +11,7 @@ final class EmailAddressType extends \Graphpinator\Type\ScalarType
 
     public function __construct()
     {
+        $this->directiveUsages = new \Graphpinator\DirectiveUsage\DirectiveUsageSet();
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1');
 
         parent::__construct();

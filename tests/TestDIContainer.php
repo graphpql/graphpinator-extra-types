@@ -36,7 +36,6 @@ final class TestDIContainer
             'Time' => self::getType('Time'),
             'Url' => self::getType('Url'),
             'Void' => self::getType('Void'),
-            'Upload' => self::getType('Upload'),
             'Gps' => self::getType('Gps'),
             'GpsInput' => self::getType('GpsInput'),
             'Point' => self::getType('Point'),
@@ -96,7 +95,6 @@ final class TestDIContainer
             'Time' => new \Graphpinator\ExtraTypes\TimeType(),
             'Url' => new \Graphpinator\ExtraTypes\UrlType(),
             'Void' => new \Graphpinator\ExtraTypes\VoidType(),
-            'Upload' => new \Graphpinator\Module\Upload\UploadType(),
             'Gps' => new \Graphpinator\ExtraTypes\GpsType(
                 self::getAccessor(),
             ),
