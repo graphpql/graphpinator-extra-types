@@ -9,12 +9,8 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
     public function simpleDataProvider() : array
     {
         return [
-            ['2010-01-01 00:00:00'],
-            ['2010-31-01 23:59:59'],
-            ['2010-28-02 24:00:00'],
-            ['2010-29-02 12:10:55'],
-            ['2010-30-04 12:12:12'],
-            ['2010-12-12 00:00:55'],
+            ['2013-04-12T16:40:00-04:00'],
+            ['2008-01-30T24:05:60-01:11'],
         ];
     }
 
@@ -24,6 +20,12 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
             ['2010-404-01 12:50:50'],
             ['2010-01-404 12:50:50'],
             ['01-01-42042 12:50:50'],
+            ['2010-01-01 00:00:00'],
+            ['2010-31-01 23:59:59'],
+            ['2010-28-02 24:00:00'],
+            ['2010-29-02 12:10:55'],
+            ['2010-30-04 12:12:12'],
+            ['2010-12-12 00:00:55'],
             ['01-01- 12:50:50'],
             ['01-01 12:50:50'],
             ['01-0 12:50:50'],
@@ -56,8 +58,9 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(string $rawValue) : void
     {
         $dateTime = new \Graphpinator\ExtraTypes\DateTimeType();
-        $value = $dateTime->createInputedValue($rawValue);
+        $value = $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $dateTime->getSpecifiedByUrl());
         self::assertSame($dateTime, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
@@ -71,6 +74,6 @@ final class DateTimeTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $dateTime = new \Graphpinator\ExtraTypes\DateTimeType();
-        $dateTime->createInputedValue($rawValue);
+        $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

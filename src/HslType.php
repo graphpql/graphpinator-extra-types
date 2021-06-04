@@ -16,6 +16,17 @@ class HslType extends \Graphpinator\Type\Type
         parent::__construct();
     }
 
+    public function validateNonNullValue(mixed $rawValue) : bool
+    {
+        return $rawValue instanceof \stdClass
+            && \property_exists($rawValue, 'hue')
+            && \property_exists($rawValue, 'saturation')
+            && \property_exists($rawValue, 'lightness')
+            && \is_int($rawValue->hue)
+            && \is_int($rawValue->saturation)
+            && \is_int($rawValue->lightness);
+    }
+
     protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
     {
         return new \Graphpinator\Field\ResolvableFieldSet([
@@ -50,16 +61,5 @@ class HslType extends \Graphpinator\Type\Type
                 ['min' => 0, 'max' => 100],
             ),
         ]);
-    }
-
-    public function validateNonNullValue(mixed $rawValue) : bool
-    {
-        return $rawValue instanceof \stdClass
-            && \property_exists($rawValue, 'hue')
-            && \property_exists($rawValue, 'saturation')
-            && \property_exists($rawValue, 'lightness')
-            && \is_int($rawValue->hue)
-            && \is_int($rawValue->saturation)
-            && \is_int($rawValue->lightness);
     }
 }

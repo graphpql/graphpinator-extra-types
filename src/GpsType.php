@@ -16,6 +16,15 @@ final class GpsType extends \Graphpinator\Type\Type
         parent::__construct();
     }
 
+    public function validateNonNullValue(mixed $rawValue) : bool
+    {
+        return $rawValue instanceof \stdClass
+            && \property_exists($rawValue, 'lat')
+            && \property_exists($rawValue, 'lng')
+            && \is_float($rawValue->lat)
+            && \is_float($rawValue->lng);
+    }
+
     protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
     {
         return new \Graphpinator\Field\ResolvableFieldSet([
@@ -40,14 +49,5 @@ final class GpsType extends \Graphpinator\Type\Type
                 ['min' => -180.0, 'max' => 180.0],
             ),
         ]);
-    }
-
-    public function validateNonNullValue(mixed $rawValue) : bool
-    {
-        return $rawValue instanceof \stdClass
-            && \property_exists($rawValue, 'lat')
-            && \property_exists($rawValue, 'lng')
-            && \is_float($rawValue->lat)
-            && \is_float($rawValue->lng);
     }
 }

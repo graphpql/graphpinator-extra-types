@@ -16,6 +16,17 @@ class RgbType extends \Graphpinator\Type\Type
         parent::__construct();
     }
 
+    public function validateNonNullValue(mixed $rawValue) : bool
+    {
+        return $rawValue instanceof \stdClass
+            && \property_exists($rawValue, 'red')
+            && \property_exists($rawValue, 'green')
+            && \property_exists($rawValue, 'blue')
+            && \is_int($rawValue->red)
+            && \is_int($rawValue->green)
+            && \is_int($rawValue->blue);
+    }
+
     protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
     {
         return new \Graphpinator\Field\ResolvableFieldSet([
@@ -50,16 +61,5 @@ class RgbType extends \Graphpinator\Type\Type
                 ['min' => 0, 'max' => 255],
             ),
         ]);
-    }
-
-    public function validateNonNullValue(mixed $rawValue) : bool
-    {
-        return $rawValue instanceof \stdClass
-            && \property_exists($rawValue, 'red')
-            && \property_exists($rawValue, 'green')
-            && \property_exists($rawValue, 'blue')
-            && \is_int($rawValue->red)
-            && \is_int($rawValue->green)
-            && \is_int($rawValue->blue);
     }
 }

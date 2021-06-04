@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Integration;
 
-use Infinityloop\Utils\Json;
+use \Infinityloop\Utils\Json;
 
 final class DirectivesTest extends \PHPUnit\Framework\TestCase
 {
@@ -23,7 +23,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": 0.5}") { hue saturation lightness alpha } }',
+                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": 0.5}") {
+                        hue saturation lightness alpha } }',
                 ]),
                 Json::fromNative((object) [
                     'data' => [
@@ -89,7 +90,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
         return [
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslaField(input: "{\"hue\": 0, \"saturation\": 0, \"lightness\": 0, \"alpha\": 0.0}") { hue saturation lightness alpha } }',
+                    'query' => 'query { hslaField(input: "{\"hue\": 0, \"saturation\": 0, \"lightness\": 0, \"alpha\": 0.0}") {
+                        hue saturation lightness alpha } }',
                 ]),
                 Json::fromNative((object) [
                     'data' => [
@@ -99,7 +101,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslaField(input: "{\"hue\": 360, \"saturation\": 100, \"lightness\": 100, \"alpha\": 1.0}") { hue saturation lightness alpha } }',
+                    'query' => 'query { hslaField(input: "{\"hue\": 360, \"saturation\": 100, \"lightness\": 100, \"alpha\": 1.0}") {
+                        hue saturation lightness alpha } }',
                 ]),
                 Json::fromNative((object) [
                     'data' => [
@@ -109,7 +112,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { rgbaField(input: "{\"red\": 0, \"green\": 0, \"blue\": 0, \"alpha\": 0.0}") { red green blue alpha } }',
+                    'query' => 'query { rgbaField(input: "{\"red\": 0, \"green\": 0, \"blue\": 0, \"alpha\": 0.0}") {
+                        red green blue alpha } }',
                 ]),
                 Json::fromNative((object) [
                     'data' => [
@@ -119,7 +123,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { rgbaField(input: "{\"red\": 255, \"green\": 255, \"blue\": 255, \"alpha\": 1.0}") { red green blue alpha } }',
+                    'query' => 'query { rgbaField(input: "{\"red\": 255, \"green\": 255, \"blue\": 255, \"alpha\": 1.0}") {
+                        red green blue alpha } }',
                 ]),
                 Json::fromNative((object) [
                     'data' => [
@@ -213,8 +218,8 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider simpleDataProvider
      * @dataProvider edgeValuesDataProvider
-     * @param Json $request
-     * @param Json $expected
+     * @param \Infinityloop\Utils\Json $request
+     * @param \Infinityloop\Utils\Json $expected
      */
     public function testSimple(Json $request, Json $expected) : void
     {
@@ -229,17 +234,20 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
         return [
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslField(input: "{\"hue\": -1, \"saturation\": 50, \"lightness\": 50}") { hue saturation lightness } }',
+                    'query' => 'query { hslField(input: "{\"hue\": -1, \"saturation\": 50, \"lightness\": 50}") {
+                        hue saturation lightness } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslField(input: "{\"hue\": 361, \"saturation\": 50, \"lightness\": 50}") { hue saturation lightness } }',
+                    'query' => 'query { hslField(input: "{\"hue\": 361, \"saturation\": 50, \"lightness\": 50}") {
+                        hue saturation lightness } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": -1, \"lightness\": 50}") { hue saturation lightness } }',
+                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": -1, \"lightness\": 50}") {
+                        hue saturation lightness } }',
                 ]),
             ],
             [
@@ -249,22 +257,26 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": -1}") { hue saturation lightness } }',
+                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": -1}") {
+                        hue saturation lightness } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 101}") { hue saturation lightness } }',
+                    'query' => 'query { hslField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 101}") {
+                        hue saturation lightness } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": -0.1}") { hue saturation lightness alpha } }',
+                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": -0.1}") {
+                        hue saturation lightness alpha } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": 1.1}") { hue saturation lightness alpha } }',
+                    'query' => 'query { hslaField(input: "{\"hue\": 180, \"saturation\": 50, \"lightness\": 50, \"alpha\": 1.1}") {
+                        hue saturation lightness alpha } }',
                 ]),
             ],
             [
@@ -299,12 +311,14 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { rgbaField(input: "{\"red\": 150, \"green\": 150, \"blue\": 150, \"alpha\": -0.1}") { red green blue alpha } }',
+                    'query' => 'query { rgbaField(input: "{\"red\": 150, \"green\": 150, \"blue\": 150, \"alpha\": -0.1}") {
+                        red green blue alpha } }',
                 ]),
             ],
             [
                 Json::fromNative((object) [
-                    'query' => 'query { rgbaField(input: "{\"red\": 150, \"green\": 150, \"blue\": 150, \"alpha\": 1.1}") { red green blue alpha } }',
+                    'query' => 'query { rgbaField(input: "{\"red\": 150, \"green\": 150, \"blue\": 150, \"alpha\": 1.1}") {
+                        red green blue alpha } }',
                 ]),
             ],
             [
@@ -432,8 +446,7 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidDataProvider
-     * @param Json $request
-     * @param Json $expected
+     * @param \Infinityloop\Utils\Json $request
      */
     public function testInvalid(Json $request) : void
     {
@@ -603,7 +616,7 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
                             ])),
                         ]);
                     }
-                }
+                },
             ),
         );
     }

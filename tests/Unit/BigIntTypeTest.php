@@ -9,9 +9,9 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     public function simpleDataProvider() : array
     {
         return [
-            [2**62],
-            [(int) 2**63], // otherwise its float for some reason
-            [(int) -2**63],
+            [2 ** 62],
+            [(int) 2 ** 63], // otherwise its float for some reason
+            [(int) -2 ** 63],
             [(int) \PHP_INT_MAX],
             [0],
         ];
@@ -20,7 +20,7 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     public function invalidDataProvider() : array
     {
         return [
-            [2**64],
+            [2 ** 64],
             ['0'],
             [true],
             [420.42],
@@ -35,10 +35,10 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(int $rawValue) : void
     {
-        $dateTime = new \Graphpinator\ExtraTypes\BigIntType();
-        $value = $dateTime->createInputedValue($rawValue);
+        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
+        $value = $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame($dateTime, $value->getType());
+        self::assertSame($bigInt, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
 
@@ -50,7 +50,7 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
-        $dateTime = new \Graphpinator\ExtraTypes\BigIntType();
-        $dateTime->createInputedValue($rawValue);
+        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
+        $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }
