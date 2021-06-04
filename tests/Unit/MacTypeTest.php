@@ -53,7 +53,7 @@ final class MacTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(string $rawValue) : void
     {
         $mac = new \Graphpinator\ExtraTypes\MacType();
-        $value = $mac->createInputedValue($rawValue);
+        $value = $mac->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($mac, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -68,6 +68,6 @@ final class MacTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $mac = new \Graphpinator\ExtraTypes\MacType();
-        $mac->createInputedValue($rawValue);
+        $mac->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

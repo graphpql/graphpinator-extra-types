@@ -32,7 +32,7 @@ final class AnyTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(mixed $rawValue) : void
     {
         $dateTime = new \Graphpinator\ExtraTypes\AnyType();
-        $value = $dateTime->createInputedValue($rawValue);
+        $value = $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($dateTime, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -47,6 +47,6 @@ final class AnyTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $dateTime = new \Graphpinator\ExtraTypes\AnyType();
-        $dateTime->createInputedValue($rawValue);
+        $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

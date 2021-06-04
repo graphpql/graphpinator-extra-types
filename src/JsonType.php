@@ -11,10 +11,9 @@ final class JsonType extends \Graphpinator\Type\ScalarType
 
     public function __construct()
     {
-        $this->directiveUsages = new \Graphpinator\DirectiveUsage\DirectiveUsageSet();
-        $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc7159');
-
         parent::__construct();
+        
+        $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc7159');
     }
 
     public function validateNonNullValue(mixed $rawValue) : bool

@@ -35,10 +35,10 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(int $rawValue) : void
     {
-        $dateTime = new \Graphpinator\ExtraTypes\BigIntType();
-        $value = $dateTime->createInputedValue($rawValue);
+        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
+        $value = $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame($dateTime, $value->getType());
+        self::assertSame($bigInt, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
 
@@ -50,7 +50,7 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
-        $dateTime = new \Graphpinator\ExtraTypes\BigIntType();
-        $dateTime->createInputedValue($rawValue);
+        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
+        $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

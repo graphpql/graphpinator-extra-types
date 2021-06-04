@@ -31,7 +31,7 @@ final class VoidTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(mixed $rawValue) : void
     {
         $void = new \Graphpinator\ExtraTypes\VoidType();
-        $value = $void->createInputedValue($rawValue);
+        $value = $void->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($void, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -46,6 +46,6 @@ final class VoidTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $void = new \Graphpinator\ExtraTypes\VoidType();
-        $void->createInputedValue($rawValue);
+        $void->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

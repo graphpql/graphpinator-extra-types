@@ -58,7 +58,7 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(string $rawValue) : void
     {
         $date = new \Graphpinator\ExtraTypes\DateType();
-        $value = $date->createInputedValue($rawValue);
+        $value = $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($date, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -73,6 +73,6 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $date = new \Graphpinator\ExtraTypes\DateType();
-        $date->createInputedValue($rawValue);
+        $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

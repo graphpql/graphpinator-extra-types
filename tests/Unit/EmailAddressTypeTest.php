@@ -42,7 +42,7 @@ final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue(string $rawValue) : void
     {
         $email = new \Graphpinator\ExtraTypes\EmailAddressType();
-        $value = $email->createInputedValue($rawValue);
+        $value = $email->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($email, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -56,7 +56,7 @@ final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
-        $date = new \Graphpinator\ExtraTypes\EmailAddressType();
-        $date->createInputedValue($rawValue);
+        $email = new \Graphpinator\ExtraTypes\EmailAddressType();
+        $email->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

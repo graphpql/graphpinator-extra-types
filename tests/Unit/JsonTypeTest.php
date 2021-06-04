@@ -34,7 +34,7 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
     public function testValidateValue($rawValue) : void
     {
         $json = new \Graphpinator\ExtraTypes\JsonType();
-        $value = $json->createInputedValue($rawValue);
+        $value = $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($json, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -49,6 +49,6 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $json = new \Graphpinator\ExtraTypes\JsonType();
-        $json->createInputedValue($rawValue);
+        $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));;
     }
 }
