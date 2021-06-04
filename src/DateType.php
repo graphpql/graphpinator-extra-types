@@ -18,7 +18,14 @@ final class DateType extends \Graphpinator\Type\ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
-        return \is_string($rawValue)
-            && \Nette\Utils\DateTime::createFromFormat('Y-m-d', $rawValue) instanceof \Nette\Utils\DateTime;
+        if (!\is_string($rawValue)) {
+            return false;
+        }
+
+        $date = \Nette\Utils\DateTime::createFromFormat('Y-m-d', $rawValue);
+        $errors = \DateTimeImmutable::getLastErrors();
+
+        return $date instanceof \Nette\Utils\DateTime
+            && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
     }
 }

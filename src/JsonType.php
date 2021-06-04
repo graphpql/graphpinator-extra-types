@@ -12,7 +12,7 @@ final class JsonType extends \Graphpinator\Type\ScalarType
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc7159');
     }
 
@@ -21,7 +21,7 @@ final class JsonType extends \Graphpinator\Type\ScalarType
         try {
             return \is_string($rawValue)
                 && \Infinityloop\Utils\Json::fromString($rawValue)->toNative();
-        } catch (\JsonException $e) {
+        } catch (\JsonException) {
             return false;
         }
     }

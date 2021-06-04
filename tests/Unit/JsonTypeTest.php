@@ -50,6 +50,6 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
         $json = new \Graphpinator\ExtraTypes\JsonType();
-        $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));;
+        $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
     }
 }

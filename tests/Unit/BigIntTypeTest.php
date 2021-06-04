@@ -9,9 +9,9 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     public function simpleDataProvider() : array
     {
         return [
-            [2**62],
-            [(int) 2**63], // otherwise its float for some reason
-            [(int) -2**63],
+            [2 ** 62],
+            [(int) 2 ** 63], // otherwise its float for some reason
+            [(int) -2 ** 63],
             [(int) \PHP_INT_MAX],
             [0],
         ];
@@ -20,7 +20,7 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
     public function invalidDataProvider() : array
     {
         return [
-            [2**64],
+            [2 ** 64],
             ['0'],
             [true],
             [420.42],

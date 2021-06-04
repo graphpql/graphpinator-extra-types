@@ -9,6 +9,13 @@ final class HslaType extends \Graphpinator\ExtraTypes\HslType
     protected const NAME = 'Hsla';
     protected const DESCRIPTION = 'Hsla type - type representing the HSL color model with added alpha (transparency).';
 
+    public function validateNonNullValue(mixed $rawValue) : bool
+    {
+        return parent::validateNonNullValue($rawValue)
+            && \property_exists($rawValue, 'alpha')
+            && \is_float($rawValue->alpha);
+    }
+
     protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(
@@ -25,12 +32,5 @@ final class HslaType extends \Graphpinator\ExtraTypes\HslType
                 ),
             ]),
         );
-    }
-
-    public function validateNonNullValue(mixed $rawValue) : bool
-    {
-        return parent::validateNonNullValue($rawValue)
-            && \property_exists($rawValue, 'alpha')
-            && \is_float($rawValue->alpha);
     }
 }

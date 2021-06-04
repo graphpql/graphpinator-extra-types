@@ -41,7 +41,7 @@ final class TestDIContainer
             'Point' => self::getType('Point'),
             'PointInput' => self::getType('PointInput'),
             'BigInt' => self::getType('BigInt'),
-        ],[
+        ], [
             'ListConstraintInput' => self::getType('ListConstraintInput'),
             'stringConstraint' => self::getType('stringConstraint'),
             'intConstraint' => self::getType('intConstraint'),

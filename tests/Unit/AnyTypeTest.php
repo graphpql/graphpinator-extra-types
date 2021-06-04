@@ -9,7 +9,7 @@ final class AnyTypeTest extends \PHPUnit\Framework\TestCase
     public function simpleDataProvider() : array
     {
         return [
-            [2**12],
+            [2 ** 12],
             ['string'], // otherwise its float for some reason
             [2.35],
             [false],
