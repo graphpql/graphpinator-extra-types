@@ -17,7 +17,9 @@ final class UUIDTypeTest extends \PHPUnit\Framework\TestCase
     {
         return [
             [''],
+            ['AA98C5A1E-A742-4808-96FA-6F409E799937'],
             ['A98C5A1E-A742-4808-96FA-6F409E799937A'],
+            ['-A98C5A1E-A742-4808-96FA-6F409E799937'],
             ['A98C5A1E-A742-4808-96FA-6F409E799937-'],
             [true],
             [420],
