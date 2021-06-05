@@ -49,6 +49,8 @@ This package contains the following types:
     - IPv4 address.
 - `\Graphpinator\ExtraTypes\IPv6Type`
     - IPv6 address.
+- `\Graphpinator\ExtraTypes\UUIDType`
+    - UUID (universally unique identifier).
 - `\Graphpinator\ExtraTypes\PostalCodeType`
     - Postal/Zip code.
 - `\Graphpinator\ExtraTypes\PhoneNumberType`
