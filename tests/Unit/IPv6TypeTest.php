@@ -68,7 +68,6 @@ final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
         $ipv6 = new \Graphpinator\ExtraTypes\IPv6Type();
         $value = $ipv6->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame('https://datatracker.ietf.org/doc/html/rfc4291#section-2.2', $ipv6->getSpecifiedByUrl());
         self::assertSame($ipv6, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
@@ -83,5 +82,12 @@ final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
 
         $ipv6 = new \Graphpinator\ExtraTypes\IPv6Type();
         $ipv6->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+    }
+
+    public function testSpecifiedBy() : void
+    {
+        $type = new \Graphpinator\ExtraTypes\IPv6Type();
+
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc4291#section-2.2', $type->getSpecifiedByUrl());
     }
 }

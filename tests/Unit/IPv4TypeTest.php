@@ -40,7 +40,6 @@ final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
         $ipv4 = new \Graphpinator\ExtraTypes\IPv4Type();
         $value = $ipv4->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame('https://datatracker.ietf.org/doc/html/rfc4001#section-3', $ipv4->getSpecifiedByUrl());
         self::assertSame($ipv4, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
@@ -55,5 +54,12 @@ final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
 
         $ipv4 = new \Graphpinator\ExtraTypes\IPv4Type();
         $ipv4->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+    }
+
+    public function testSpecifiedBy() : void
+    {
+        $type = new \Graphpinator\ExtraTypes\IPv4Type();
+
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc4001#section-3', $type->getSpecifiedByUrl());
     }
 }

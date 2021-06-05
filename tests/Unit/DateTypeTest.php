@@ -60,7 +60,6 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
         $date = new \Graphpinator\ExtraTypes\DateType();
         $value = $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $date->getSpecifiedByUrl());
         self::assertSame($date, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
@@ -75,5 +74,12 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
 
         $date = new \Graphpinator\ExtraTypes\DateType();
         $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+    }
+
+    public function testSpecifiedBy() : void
+    {
+        $type = new \Graphpinator\ExtraTypes\DateType();
+
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $type->getSpecifiedByUrl());
     }
 }

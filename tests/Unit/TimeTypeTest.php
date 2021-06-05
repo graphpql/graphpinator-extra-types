@@ -51,7 +51,6 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
         $time = new \Graphpinator\ExtraTypes\TimeType();
         $value = $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
-        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $time->getSpecifiedByUrl());
         self::assertSame($time, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
     }
@@ -66,5 +65,12 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
 
         $time = new \Graphpinator\ExtraTypes\TimeType();
         $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+    }
+
+    public function testSpecifiedBy() : void
+    {
+        $type = new \Graphpinator\ExtraTypes\TimeType();
+
+        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $type->getSpecifiedByUrl());
     }
 }
