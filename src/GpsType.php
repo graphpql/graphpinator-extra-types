@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class GpsType extends \Graphpinator\Type\Type
+final class GpsType extends \Graphpinator\Typesystem\Type
 {
     protected const NAME = 'Gps';
     protected const DESCRIPTION = 'Gps type - latitude and longitude.';
@@ -25,12 +25,12 @@ final class GpsType extends \Graphpinator\Type\Type
             && \is_float($rawValue->lng);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
     {
-        return new \Graphpinator\Field\ResolvableFieldSet([
-            \Graphpinator\Field\ResolvableField::create(
+        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'lat',
-                \Graphpinator\Container\Container::Float()->notNull(),
+                \Graphpinator\Typesystem\Container::Float()->notNull(),
                 static function(\stdClass $gps) : float {
                     return $gps->lat;
                 },
@@ -38,9 +38,9 @@ final class GpsType extends \Graphpinator\Type\Type
                 $this->constraintDirectiveAccessor->getFloat(),
                 ['min' => -90.0, 'max' => 90.0],
             ),
-            \Graphpinator\Field\ResolvableField::create(
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'lng',
-                \Graphpinator\Container\Container::Float()->notNull(),
+                \Graphpinator\Typesystem\Container::Float()->notNull(),
                 static function(\stdClass $gps) : float {
                     return $gps->lng;
                 },

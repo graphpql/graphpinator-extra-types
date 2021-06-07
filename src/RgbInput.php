@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class RgbInput extends \Graphpinator\Type\InputType
+class RgbInput extends \Graphpinator\Typesystem\InputType
 {
     protected const NAME = 'RgbInput';
     protected const DESCRIPTION = 'Rgb input - input for the RGB color model.';
@@ -16,26 +16,26 @@ class RgbInput extends \Graphpinator\Type\InputType
         parent::__construct();
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Argument\ArgumentSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
     {
-        return new \Graphpinator\Argument\ArgumentSet([
-            \Graphpinator\Argument\Argument::create(
+        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'red',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Argument\Argument::create(
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'green',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Argument\Argument::create(
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'blue',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],

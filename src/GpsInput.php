@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class GpsInput extends \Graphpinator\Type\InputType
+final class GpsInput extends \Graphpinator\Typesystem\InputType
 {
     protected const NAME = 'GpsInput';
     protected const DESCRIPTION = 'Gps input - input for the GPS.';
@@ -16,19 +16,19 @@ final class GpsInput extends \Graphpinator\Type\InputType
         parent::__construct();
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Argument\ArgumentSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
     {
-        return new \Graphpinator\Argument\ArgumentSet([
-            \Graphpinator\Argument\Argument::create(
+        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'lat',
-                \Graphpinator\Container\Container::Float()->notNull(),
+                \Graphpinator\Typesystem\Container::Float()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getFloat(),
                 ['min' => -90.0, 'max' => 90.0],
             ),
-            \Graphpinator\Argument\Argument::create(
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'lng',
-                \Graphpinator\Container\Container::Float()->notNull(),
+                \Graphpinator\Typesystem\Container::Float()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getFloat(),
                 ['min' => -180.0, 'max' => 180.0],

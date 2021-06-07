@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class DateTimeType extends \Graphpinator\Type\ScalarType
+final class DateTimeType extends \Graphpinator\Typesystem\ScalarType
 {
     use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
 

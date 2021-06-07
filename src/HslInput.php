@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class HslInput extends \Graphpinator\Type\InputType
+class HslInput extends \Graphpinator\Typesystem\InputType
 {
     protected const NAME = 'HslInput';
     protected const DESCRIPTION = 'Hsl input - input for the HSL color model.';
@@ -16,26 +16,26 @@ class HslInput extends \Graphpinator\Type\InputType
         parent::__construct();
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Argument\ArgumentSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
     {
-        return new \Graphpinator\Argument\ArgumentSet([
-            \Graphpinator\Argument\Argument::create(
+        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'hue',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 360],
             ),
-            \Graphpinator\Argument\Argument::create(
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'saturation',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 100],
             ),
-            \Graphpinator\Argument\Argument::create(
+            \Graphpinator\Typesystem\Argument\Argument::create(
                 'lightness',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 100],

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class HslType extends \Graphpinator\Type\Type
+class HslType extends \Graphpinator\Typesystem\Type
 {
     protected const NAME = 'Hsl';
     protected const DESCRIPTION = 'Hsl type - type representing the HSL color model.';
@@ -27,12 +27,12 @@ class HslType extends \Graphpinator\Type\Type
             && \is_int($rawValue->lightness);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
     {
-        return new \Graphpinator\Field\ResolvableFieldSet([
-            \Graphpinator\Field\ResolvableField::create(
+        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'hue',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->hue;
                 },
@@ -40,9 +40,9 @@ class HslType extends \Graphpinator\Type\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 360],
             ),
-            \Graphpinator\Field\ResolvableField::create(
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'saturation',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->saturation;
                 },
@@ -50,9 +50,9 @@ class HslType extends \Graphpinator\Type\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 100],
             ),
-            \Graphpinator\Field\ResolvableField::create(
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'lightness',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->lightness;
                 },

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class RgbType extends \Graphpinator\Type\Type
+class RgbType extends \Graphpinator\Typesystem\Type
 {
     protected const NAME = 'Rgb';
     protected const DESCRIPTION = 'Rgb type - type representing the RGB color model.';
@@ -27,12 +27,12 @@ class RgbType extends \Graphpinator\Type\Type
             && \is_int($rawValue->blue);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
     {
-        return new \Graphpinator\Field\ResolvableFieldSet([
-            \Graphpinator\Field\ResolvableField::create(
+        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'red',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->red;
                 },
@@ -40,9 +40,9 @@ class RgbType extends \Graphpinator\Type\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Field\ResolvableField::create(
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'green',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->green;
                 },
@@ -50,9 +50,9 @@ class RgbType extends \Graphpinator\Type\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Field\ResolvableField::create(
+            \Graphpinator\Typesystem\Field\ResolvableField::create(
                 'blue',
-                \Graphpinator\Container\Container::Int()->notNull(),
+                \Graphpinator\Typesystem\Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->blue;
                 },

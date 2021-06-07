@@ -16,13 +16,13 @@ final class RgbaType extends \Graphpinator\ExtraTypes\RgbType
             && \is_float($rawValue->alpha);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(
-            new \Graphpinator\Field\ResolvableFieldSet([
-                \Graphpinator\Field\ResolvableField::create(
+            new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
+                \Graphpinator\Typesystem\Field\ResolvableField::create(
                     'alpha',
-                    \Graphpinator\Container\Container::Float()->notNull(),
+                    \Graphpinator\Typesystem\Container::Float()->notNull(),
                     static function (\stdClass $rgba) : float {
                         return $rgba->alpha;
                     },
