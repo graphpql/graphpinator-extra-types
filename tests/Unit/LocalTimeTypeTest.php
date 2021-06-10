@@ -4,30 +4,23 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class TimeTypeTest extends \PHPUnit\Framework\TestCase
+final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
 {
     public function simpleDataProvider() : array
     {
         return [
-            ['T16:40:00-04:00'],
-            ['T23:05:59-01:11'],
+            ['16:40:00'],
+            ['00:05:59'],
         ];
     }
 
     public function invalidDataProvider() : array
     {
         return [
-            ['T40:85:90-01:11'],
-            ['T24:61:60-1:11'],
+            ['24:05:60'],
+            ['T24:05:60-01:11'],
             ['120:10:55'],
             ['12:100:55'],
-            ['12:10:550'],
-            ['00:00:00'],
-            ['23:59:59'],
-            ['24:00:00'],
-            ['12:10:55'],
-            ['12:12:12'],
-            ['00:00:55'],
             ['1210:55'],
             ['12:1055'],
             [':00:00'],
@@ -50,7 +43,7 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $time = new \Graphpinator\ExtraTypes\TimeType();
+        $time = new \Graphpinator\ExtraTypes\LocalTimeType();
         $value = $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($time, $value->getType());
@@ -65,14 +58,7 @@ final class TimeTypeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
 
-        $time = new \Graphpinator\ExtraTypes\TimeType();
+        $time = new \Graphpinator\ExtraTypes\LocalTimeType();
         $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
-    }
-
-    public function testSpecifiedBy() : void
-    {
-        $type = new \Graphpinator\ExtraTypes\TimeType();
-
-        self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $type->getSpecifiedByUrl());
     }
 }

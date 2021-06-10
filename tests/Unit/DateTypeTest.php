@@ -10,10 +10,10 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
     {
         return [
             ['2010-01-01'],
-            ['2010-31-01'],
-            ['2010-28-02'],
-            ['2010-29-02'],
-            ['2010-30-04'],
+            ['2010-01-31'],
+            ['2010-02-28'],
+            ['2012-02-29'],
+            ['2010-04-30'],
             ['2010-12-12'],
         ];
     }
@@ -21,6 +21,7 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
     public function invalidDataProvider() : array
     {
         return [
+            ['2011-02-29'],
             ['404-01-2010 12:50:50'],
             ['01-404-2010 12:50:50'],
             ['01-01-42042 12:50:50'],

@@ -37,6 +37,10 @@ This package contains the following types:
     - Date in ISO 8601 format (the date part).
 - `\Graphpinator\ExtraTypes\TimeType`
     - Time in ISO 8601 format (the time part).
+- `\Graphpinator\ExtraTypes\LocalDateTimeType`
+    - Datetime in "YYYY-MM-DD HH:MM:SS" format (without the timezone information).
+- `\Graphpinator\ExtraTypes\LocalTimeType`
+    - Time in "HH:MM:SS" format (without the timezone information).
 - `\Graphpinator\ExtraTypes\JsonType`
     - Valid JSON.
 - `\Graphpinator\ExtraTypes\EmailAddressType`
