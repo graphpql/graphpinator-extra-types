@@ -12,6 +12,7 @@ trait TDateTimeValidate
         $errors = \DateTimeImmutable::getLastErrors();
 
         return $dateTime instanceof \Nette\Utils\DateTime
+            && $dateTime->format($format) === $value
             && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
     }
 }
