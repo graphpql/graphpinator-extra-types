@@ -21,10 +21,9 @@ final class NotNullForArgDirective extends \Graphpinator\Typesystem\Directive im
         \Graphpinator\Value\ArgumentValueSet $arguments,
     ) : bool
     {
-        // field has argument with given name
-        return $field->getArguments()->offsetExists(
-            $arguments->offsetGet('name')->getValue()->getRawValue(),
-        );
+        // field has argument with given name and has nullable type
+        return $field->getArguments()->offsetExists($arguments->offsetGet('name')->getValue()->getRawValue())
+            && !$field->getType() instanceof \Graphpinator\Typesystem\NotNullType;
     }
 
     public function validateVariance(
