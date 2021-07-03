@@ -20,7 +20,7 @@ In order to enable the types on your server, the only thing you need to do is to
 
 This package contains the following types:
 
-##### Miscellaneous
+##### Miscellaneous types
 
 - `\Graphpinator\ExtraTypes\AnyType`
     - Any scalar value is accepted = `string | int | float | bool`.
@@ -29,7 +29,7 @@ This package contains the following types:
 - `\Graphpinator\ExtraTypes\BigIntType`
     - GraphqQL `Int` is required to be 32bit, `BigInt` type bypasses that restriction and allows for 64bit integers.
 
-##### String value
+##### String value types
 
 - `\Graphpinator\ExtraTypes\DateTimeType`
     - Datetime in ISO 8601 format.
@@ -60,7 +60,7 @@ This package contains the following types:
 - `\Graphpinator\ExtraTypes\PhoneNumberType`
     - Phone number.
 
-##### Composite types & inputs
+##### Object & input types
 
 - `\Graphpinator\ExtraTypes\PointType` & `\Graphpinator\ExtraTypes\PointInput`
     - Any pair of x/y values.
@@ -79,3 +79,9 @@ This package contains the following types:
 - `\Graphpinator\ExtraTypes\RgbaType` & `\Graphpinator\ExtraTypes\RgbaInput`
     - RGB color scheme with added alpha.
     - Requires constraint-directives.
+
+##### Directives
+
+- `\Graphpinator\ExtraTypes\NotNullForArg`
+    - Directive on Field definition location. 
+    - It guarantees that nullable field wont return null if specified argument value is provided.
