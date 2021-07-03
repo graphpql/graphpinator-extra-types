@@ -82,6 +82,6 @@ This package contains the following types:
 
 ##### Directives
 
-- `\Graphpinator\ExtraTypes\NotNullForArg`
+- `\Graphpinator\ExtraTypes\NotNullForArgDirective`
     - Directive on Field definition location. 
     - It guarantees that nullable field wont return null if specified argument value is provided.
