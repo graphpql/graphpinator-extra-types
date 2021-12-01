@@ -459,157 +459,157 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
     private function getGraphpinator() : \Graphpinator\Graphpinator
     {
         return new \Graphpinator\Graphpinator(
-            new \Graphpinator\Type\Schema(
+            new \Graphpinator\Typesystem\Schema(
                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getTypeContainer(),
-                new class extends \Graphpinator\Type\Type {
+                new class extends \Graphpinator\Typesystem\Type {
                     public function validateNonNullValue(mixed $rawValue) : bool
                     {
                         return true;
                     }
 
-                    protected function getFieldDefinition() : \Graphpinator\Field\ResolvableFieldSet
+                    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
                     {
-                        return new \Graphpinator\Field\ResolvableFieldSet([
-                            \Graphpinator\Field\ResolvableField::create(
+                        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'hslField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Hsl'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'hslaField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Hsla'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'rgbField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgb'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'rgbaField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgba'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'gpsField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Gps'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'pointField',
                                 \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Point'),
                                 static function ($parent, string $input) : \stdClass {
                                     return \json_decode($input);
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Json')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'hslInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('HslInput')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'hslaInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('HslaInput')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'rgbInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('RgbInput')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'rgbaInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('RgbaInput')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'gpsInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('GpsInput')->notNull(),
                                 ),
                             ])),
-                            \Graphpinator\Field\ResolvableField::create(
+                            \Graphpinator\Typesystem\Field\ResolvableField::create(
                                 'pointInput',
-                                \Graphpinator\Container\Container::Int(),
+                                \Graphpinator\Typesystem\Container::Int(),
                                 static function ($parent, \stdClass $input) : int {
                                     return 1;
                                 },
-                            )->setArguments(new \Graphpinator\Argument\ArgumentSet([
-                                \Graphpinator\Argument\Argument::create(
+                            )->setArguments(new \Graphpinator\Typesystem\Argument\ArgumentSet([
+                                \Graphpinator\Typesystem\Argument\Argument::create(
                                     'input',
                                     \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('PointInput')->notNull(),
                                 ),

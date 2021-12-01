@@ -10,11 +10,11 @@ final class TestDIContainer
 
     private static array $types = [];
     private static ?\Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $accessor = null;
-    private static ?\Graphpinator\Container\Container $container = null;
+    private static ?\Graphpinator\Typesystem\Container $container = null;
 
     public static function getTypeContainer() : \Graphpinator\Typesystem\Container
     {
-        return new \Graphpinator\Container\SimpleContainer([
+        return new \Graphpinator\SimpleContainer([
             'Any' => self::getType('Any'),
             'DateTime' => self::getType('DateTime'),
             'Date' => self::getType('Date'),
@@ -107,6 +107,9 @@ final class TestDIContainer
             'ListConstraintInput' => new \Graphpinator\ConstraintDirectives\ListConstraintInput(
                 self::getAccessor(),
             ),
+            'ObjectConstraintInput' => new \Graphpinator\ConstraintDirectives\ObjectConstraintInput(
+                self::getAccessor(),
+            ),
             'stringConstraint' => new \Graphpinator\ConstraintDirectives\StringConstraintDirective(
                 self::getAccessor(),
             ),
@@ -160,6 +163,11 @@ final class TestDIContainer
                 public function getObject() : \Graphpinator\ConstraintDirectives\ObjectConstraintDirective
                 {
                     return TestDIContainer::getType('objectConstraint');
+                }
+
+                public function getObjectInput() : \Graphpinator\ConstraintDirectives\ObjectConstraintInput
+                {
+                    return TestDIContainer::getType('ObjectConstraintInput');
                 }
             };
         }
