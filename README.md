@@ -85,3 +85,6 @@ This package contains the following types:
 - `\Graphpinator\ExtraTypes\NotNullForArgDirective`
     - Directive on Field definition location. 
     - It guarantees that nullable field wont return null if specified argument value is provided.
+- `\Graphpinator\ExtraTypes\OptionalDirective`
+    - Argument definition location. 
+    - It marks nullable input field as optional, but not nullable. This input field may be either omitted or contain valid value, but may not be set to null.
