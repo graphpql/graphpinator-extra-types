@@ -28,7 +28,7 @@ final class RationalNumberInput extends \Graphpinator\Typesystem\InputType
                 \Graphpinator\Typesystem\Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
-                ['min' => 0],
+                ['min' => 1],
             ),
         ]);
     }

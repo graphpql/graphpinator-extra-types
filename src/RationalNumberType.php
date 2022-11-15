@@ -43,7 +43,7 @@ final class RationalNumberType extends \Graphpinator\Typesystem\Type
                 },
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
-                ['min' => 0],
+                ['min' => 1],
             ),
         ]);
     }
