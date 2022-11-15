@@ -46,7 +46,7 @@ final class OptionalDirective extends \Graphpinator\Typesystem\Directive impleme
             throw new class extends \Graphpinator\Exception\GraphpinatorBase {
                 public const MESSAGE = 'Input field is @optional and therefore cannot contain null value.';
 
-                public function isOutputable(): bool
+                public function isOutputable() : bool
                 {
                     return true;
                 }
