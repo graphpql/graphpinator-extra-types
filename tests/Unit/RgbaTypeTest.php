@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class RgbaTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             [(object) ['red' => 255, 'green' => 255, 'blue' => 255, 'alpha' => 1.0]],
@@ -16,7 +16,7 @@ final class RgbaTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [(object) ['green' => 50, 'blue' => 50, 'alpha' => 0.5]],

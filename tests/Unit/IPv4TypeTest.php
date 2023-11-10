@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             ['255.255.255.255'],
@@ -15,7 +15,7 @@ final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             ['420.255.255.255'],

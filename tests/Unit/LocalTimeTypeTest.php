@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             ['16:40:00'],
@@ -14,7 +14,7 @@ final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             ['24:05:60'],

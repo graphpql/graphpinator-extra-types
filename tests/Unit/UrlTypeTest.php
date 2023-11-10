@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class UrlTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             ['http://foo.com/blah_blah'],
@@ -53,7 +53,7 @@ final class UrlTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             ['http://✪df.ws/123'],

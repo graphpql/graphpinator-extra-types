@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class GpsTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             [(object) ['lat' => 0.0, 'lng' => 0.0]],
@@ -17,7 +17,7 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [(object) ['lat' => 0, 'lng' => 0.0]],
@@ -36,7 +36,7 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function constraintDataProvider() : array
+    public static function constraintDataProvider() : array
     {
         return [
             [(object) ['lat' => -90.1, 'lng' => 0.0]],

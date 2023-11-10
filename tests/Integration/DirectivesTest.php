@@ -8,7 +8,7 @@ use \Infinityloop\Utils\Json;
 
 final class DirectivesTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             [
@@ -85,7 +85,7 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function edgeValuesDataProvider() : array
+    public static function edgeValuesDataProvider() : array
     {
         return [
             [
@@ -215,21 +215,7 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @dataProvider simpleDataProvider
-     * @dataProvider edgeValuesDataProvider
-     * @param \Infinityloop\Utils\Json $request
-     * @param \Infinityloop\Utils\Json $expected
-     */
-    public function testSimple(Json $request, Json $expected) : void
-    {
-        $graphpinator = $this->getGraphpinator();
-        $result = $graphpinator->run(new \Graphpinator\Request\JsonRequestFactory($request));
-
-        self::assertSame($expected->toString(), $result->toString());
-    }
-
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [
@@ -442,6 +428,20 @@ final class DirectivesTest extends \PHPUnit\Framework\TestCase
                 ]),
             ],
         ];
+    }
+
+    /**
+     * @dataProvider simpleDataProvider
+     * @dataProvider edgeValuesDataProvider
+     * @param \Infinityloop\Utils\Json $request
+     * @param \Infinityloop\Utils\Json $expected
+     */
+    public function testSimple(Json $request, Json $expected) : void
+    {
+        $graphpinator = $this->getGraphpinator();
+        $result = $graphpinator->run(new \Graphpinator\Request\JsonRequestFactory($request));
+
+        self::assertSame($expected->toString(), $result->toString());
     }
 
     /**

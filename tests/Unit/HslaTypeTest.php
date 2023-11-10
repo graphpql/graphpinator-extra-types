@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class HslaTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             [(object) ['hue' => 360, 'saturation' => 100, 'lightness' => 100, 'alpha' => 1.0]],
@@ -16,7 +16,7 @@ final class HslaTypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [(object) ['saturation' => 50, 'lightness' => 50, 'alpha' => 0.5]],

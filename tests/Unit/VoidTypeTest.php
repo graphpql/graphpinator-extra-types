@@ -6,14 +6,14 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class VoidTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             [null],
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [true],

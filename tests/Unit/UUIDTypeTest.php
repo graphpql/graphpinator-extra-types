@@ -6,14 +6,14 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class UUIDTypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             ['A98C5A1E-A742-4808-96FA-6F409E799937'],
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             [''],

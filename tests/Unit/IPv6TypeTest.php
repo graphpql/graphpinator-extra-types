@@ -6,7 +6,7 @@ namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
 {
-    public function simpleDataProvider() : array
+    public static function simpleDataProvider() : array
     {
         return [
             ['AAAA:AAAA:AAAA:AAAA:AAAA:AAAA:AAAA:AAAA'],
@@ -41,7 +41,7 @@ final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDataProvider() : array
+    public static function invalidDataProvider() : array
     {
         return [
             ['6500:0000:0000:0000:0025:fa56:0026'],
