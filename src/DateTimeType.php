@@ -9,7 +9,7 @@ final class DateTimeType extends \Graphpinator\Typesystem\ScalarType
     use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
 
     protected const NAME = 'DateTime';
-    protected const DESCRIPTION = 'DateTime type - string which contains valid date in ISO8601 format.';
+    protected const DESCRIPTION = 'DateTime type - string which contains valid date in ISO8601 format without miliseconds.';
 
     public function __construct()
     {
