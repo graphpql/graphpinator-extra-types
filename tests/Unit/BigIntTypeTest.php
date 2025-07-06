@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\BigIntType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class BigIntTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -35,8 +40,8 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(int $rawValue) : void
     {
-        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
-        $value = $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $bigInt = new BigIntType();
+        $value = $bigInt->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($bigInt, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -48,9 +53,9 @@ final class BigIntTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid(mixed $rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $bigInt = new \Graphpinator\ExtraTypes\BigIntType();
-        $bigInt->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $bigInt = new BigIntType();
+        $bigInt->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

@@ -4,13 +4,19 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class GpsType extends \Graphpinator\Typesystem\Type
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
+
+final class GpsType extends Type
 {
     protected const NAME = 'Gps';
     protected const DESCRIPTION = 'Gps type - latitude and longitude.';
 
     public function __construct(
-        private \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        private ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
@@ -25,12 +31,12 @@ final class GpsType extends \Graphpinator\Typesystem\Type
             && \is_float($rawValue->lng);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
-        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+        return new ResolvableFieldSet([
+            ResolvableField::create(
                 'lat',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
                 static function(\stdClass $gps) : float {
                     return $gps->lat;
                 },
@@ -38,9 +44,9 @@ final class GpsType extends \Graphpinator\Typesystem\Type
                 $this->constraintDirectiveAccessor->getFloat(),
                 ['min' => -90.0, 'max' => 90.0],
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'lng',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
                 static function(\stdClass $gps) : float {
                     return $gps->lng;
                 },

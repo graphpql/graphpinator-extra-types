@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class PointType extends \Graphpinator\Typesystem\Type
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
+
+final class PointType extends Type
 {
     protected const NAME = 'Point';
     protected const DESCRIPTION = 'Point type - x and y coordinates.';
@@ -18,19 +23,19 @@ final class PointType extends \Graphpinator\Typesystem\Type
             && \is_float($rawValue->y);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
-        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-            new \Graphpinator\Typesystem\Field\ResolvableField(
+        return new ResolvableFieldSet([
+            new ResolvableField(
                 'x',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
                 static function(\stdClass $point) : float {
                     return $point->x;
                 },
             ),
-            new \Graphpinator\Typesystem\Field\ResolvableField(
+            new ResolvableField(
                 'y',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
                 static function(\stdClass $point) : float {
                     return $point->y;
                 },

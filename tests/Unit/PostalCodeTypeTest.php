@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class PostalCodeTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\PostalCodeType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class PostalCodeTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -46,8 +51,8 @@ final class PostalCodeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $postalCode = new \Graphpinator\ExtraTypes\PostalCodeType();
-        $value = $postalCode->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $postalCode = new PostalCodeType();
+        $value = $postalCode->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($postalCode, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -59,9 +64,9 @@ final class PostalCodeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $postalCode = new \Graphpinator\ExtraTypes\PostalCodeType();
-        $postalCode->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $postalCode = new PostalCodeType();
+        $postalCode->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

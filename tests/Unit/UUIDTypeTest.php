@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class UUIDTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\UUIDType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class UUIDTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -36,8 +41,8 @@ final class UUIDTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $type = new \Graphpinator\ExtraTypes\UUIDType();
-        $value = $type->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $type = new UUIDType();
+        $value = $type->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($type, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -49,15 +54,15 @@ final class UUIDTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $ipv4 = new \Graphpinator\ExtraTypes\UUIDType();
-        $ipv4->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $ipv4 = new UUIDType();
+        $ipv4->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\UUIDType();
+        $type = new UUIDType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc4122', $type->getSpecifiedByUrl());
     }

@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class AnyTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\AnyType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class AnyTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -31,8 +36,8 @@ final class AnyTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(mixed $rawValue) : void
     {
-        $dateTime = new \Graphpinator\ExtraTypes\AnyType();
-        $value = $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $dateTime = new AnyType();
+        $value = $dateTime->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($dateTime, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -44,9 +49,9 @@ final class AnyTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid(mixed $rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $dateTime = new \Graphpinator\ExtraTypes\AnyType();
-        $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $dateTime = new AnyType();
+        $dateTime->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

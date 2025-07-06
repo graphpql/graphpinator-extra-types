@@ -4,8 +4,17 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class OptionalDirective extends \Graphpinator\Typesystem\Directive implements
-    \Graphpinator\Typesystem\Location\ArgumentDefinitionLocation
+use Graphpinator\Exception\GraphpinatorBase;
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
+use Graphpinator\Typesystem\Directive;
+use Graphpinator\Typesystem\Location\ArgumentDefinitionLocation;
+use Graphpinator\Value\ArgumentValue;
+use Graphpinator\Value\ArgumentValueSet;
+use Graphpinator\Value\NullInputedValue;
+
+final class OptionalDirective extends Directive implements
+    ArgumentDefinitionLocation
 {
     protected const NAME = 'optional';
     protected const DESCRIPTION = 'Input value for this argument can be either omitted or have non-null value.';
@@ -16,20 +25,20 @@ final class OptionalDirective extends \Graphpinator\Typesystem\Directive impleme
     }
 
     public function validateArgumentUsage(
-        \Graphpinator\Typesystem\Argument\Argument $argument,
-        \Graphpinator\Value\ArgumentValueSet $arguments,
+        Argument $argument,
+        ArgumentValueSet $arguments,
     ) : bool
     {
         return true;
     }
 
     public function validateVariance(
-        ?\Graphpinator\Value\ArgumentValueSet $biggerSet,
-        ?\Graphpinator\Value\ArgumentValueSet $smallerSet,
+        ?ArgumentValueSet $biggerSet,
+        ?ArgumentValueSet $smallerSet,
     ) : void
     {
-        if ($biggerSet instanceof \Graphpinator\Value\ArgumentValueSet &&
-            $smallerSet instanceof \Graphpinator\Value\ArgumentValueSet &&
+        if ($biggerSet instanceof ArgumentValueSet &&
+            $smallerSet instanceof ArgumentValueSet &&
             $biggerSet->isSame($smallerSet)) {
             return;
         }
@@ -38,12 +47,12 @@ final class OptionalDirective extends \Graphpinator\Typesystem\Directive impleme
     }
 
     public function resolveArgumentDefinition(
-        \Graphpinator\Value\ArgumentValueSet $arguments,
-        \Graphpinator\Value\ArgumentValue $argumentValue,
+        ArgumentValueSet $arguments,
+        ArgumentValue $argumentValue,
     ) : void
     {
-        if ($argumentValue->getValue() instanceof \Graphpinator\Value\NullInputedValue) {
-            throw new class extends \Graphpinator\Exception\GraphpinatorBase {
+        if ($argumentValue->getValue() instanceof NullInputedValue) {
+            throw new class extends GraphpinatorBase {
                 public const MESSAGE = 'Input field is @optional and therefore cannot contain null value.';
 
                 public function isOutputable() : bool
@@ -54,8 +63,8 @@ final class OptionalDirective extends \Graphpinator\Typesystem\Directive impleme
         }
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
+    protected function getFieldDefinition() : ArgumentSet
     {
-        return new \Graphpinator\Typesystem\Argument\ArgumentSet();
+        return new ArgumentSet();
     }
 }

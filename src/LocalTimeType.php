@@ -4,9 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class LocalTimeType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+use Graphpinator\Typesystem\ScalarType;
+
+final class LocalTimeType extends ScalarType
 {
-    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+    use TDateTimeValidate;
 
     protected const NAME = 'LocalTime';
     protected const DESCRIPTION = 'LocalTime type - string which contains time in "HH:MM:SS" format (without timezone information).';

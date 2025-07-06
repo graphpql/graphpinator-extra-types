@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class AnyType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class AnyType extends ScalarType
 {
     protected const NAME = 'Any';
     protected const DESCRIPTION = 'Any addon type, accepts any scalar type - String, Int, Float or Bool.';

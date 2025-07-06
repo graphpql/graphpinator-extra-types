@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class IPv6Type extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class IPv6Type extends ScalarType
 {
     protected const NAME = 'Ipv6';
     protected const DESCRIPTION = 'Ipv6 type - string which contains valid IPv6 address.';

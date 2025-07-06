@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class LocalDateTimeTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\LocalDateTimeType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class LocalDateTimeTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -56,8 +61,8 @@ final class LocalDateTimeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $dateTime = new \Graphpinator\ExtraTypes\LocalDateTimeType();
-        $value = $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $dateTime = new LocalDateTimeType();
+        $value = $dateTime->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($dateTime, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -69,9 +74,9 @@ final class LocalDateTimeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $dateTime = new \Graphpinator\ExtraTypes\LocalDateTimeType();
-        $dateTime->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $dateTime = new LocalDateTimeType();
+        $dateTime->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

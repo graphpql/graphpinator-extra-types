@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class PostalCodeType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class PostalCodeType extends ScalarType
 {
     protected const NAME = 'PostalCode';
     protected const DESCRIPTION = 'PostalCode type - string which contains valid postal code (ZIP code) in "NNN NN" format.';

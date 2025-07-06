@@ -4,35 +4,47 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class NotNullForArgDirective extends \Graphpinator\Typesystem\Directive implements
-    \Graphpinator\Typesystem\Location\FieldDefinitionLocation
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Directive;
+use Graphpinator\Typesystem\Field\Field;
+use Graphpinator\Typesystem\Location\FieldDefinitionLocation;
+use Graphpinator\Typesystem\NotNullType;
+use Graphpinator\Value\ArgumentValueSet;
+use Graphpinator\Value\FieldValue;
+use Graphpinator\Value\NullValue;
+use Graphpinator\Value\ResolvedValue;
+
+final class NotNullForArgDirective extends Directive implements
+    FieldDefinitionLocation
 {
     protected const NAME = 'notNullForArg';
     protected const DESCRIPTION = 'Field guarantees it wont return null when the condition is met.';
 
     public function __construct(
-        private \Graphpinator\ExtraTypes\AnyType $anyType,
+        private AnyType $anyType,
     )
     {
     }
 
     public function validateFieldUsage(
-        \Graphpinator\Typesystem\Field\Field $field,
-        \Graphpinator\Value\ArgumentValueSet $arguments,
+        Field $field,
+        ArgumentValueSet $arguments,
     ) : bool
     {
         // field has argument with given name and has nullable type
         return $field->getArguments()->offsetExists($arguments->offsetGet('name')->getValue()->getRawValue())
-            && !$field->getType() instanceof \Graphpinator\Typesystem\NotNullType;
+            && !$field->getType() instanceof NotNullType;
     }
 
     public function validateVariance(
-        ?\Graphpinator\Value\ArgumentValueSet $biggerSet,
-        ?\Graphpinator\Value\ArgumentValueSet $smallerSet,
+        ?ArgumentValueSet $biggerSet,
+        ?ArgumentValueSet $smallerSet,
     ) : void
     {
-        if ($biggerSet instanceof \Graphpinator\Value\ArgumentValueSet &&
-            $smallerSet instanceof \Graphpinator\Value\ArgumentValueSet &&
+        if ($biggerSet instanceof ArgumentValueSet &&
+            $smallerSet instanceof ArgumentValueSet &&
             $biggerSet->isSame($smallerSet)) {
             return;
         }
@@ -41,29 +53,29 @@ final class NotNullForArgDirective extends \Graphpinator\Typesystem\Directive im
     }
 
     public function resolveFieldDefinitionStart(
-        \Graphpinator\Value\ArgumentValueSet $arguments,
-        \Graphpinator\Value\ResolvedValue $parentValue,
+        ArgumentValueSet $arguments,
+        ResolvedValue $parentValue,
     ) : void
     {
         // nothing here
     }
 
     public function resolveFieldDefinitionBefore(
-        \Graphpinator\Value\ArgumentValueSet $arguments,
-        \Graphpinator\Value\ResolvedValue $parentValue,
-        \Graphpinator\Value\ArgumentValueSet $fieldArguments,
+        ArgumentValueSet $arguments,
+        ResolvedValue $parentValue,
+        ArgumentValueSet $fieldArguments,
     ) : void
     {
         // nothing here
     }
 
     public function resolveFieldDefinitionAfter(
-        \Graphpinator\Value\ArgumentValueSet $arguments,
-        \Graphpinator\Value\ResolvedValue $resolvedValue,
-        \Graphpinator\Value\ArgumentValueSet $fieldArguments,
+        ArgumentValueSet $arguments,
+        ResolvedValue $resolvedValue,
+        ArgumentValueSet $fieldArguments,
     ) : void
     {
-        if (!$resolvedValue instanceof \Graphpinator\Value\NullValue) {
+        if (!$resolvedValue instanceof NullValue) {
             return;
         }
 
@@ -77,21 +89,21 @@ final class NotNullForArgDirective extends \Graphpinator\Typesystem\Directive im
     }
 
     public function resolveFieldDefinitionValue(
-        \Graphpinator\Value\ArgumentValueSet $arguments,
-        \Graphpinator\Value\FieldValue $fieldValue,
+        ArgumentValueSet $arguments,
+        FieldValue $fieldValue,
     ) : void
     {
         // nothing here
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
+    protected function getFieldDefinition() : ArgumentSet
     {
-        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
-            \Graphpinator\Typesystem\Argument\Argument::create(
+        return new ArgumentSet([
+            Argument::create(
                 'name',
-                \Graphpinator\Typesystem\Container::String()->notNull(),
+                Container::String()->notNull(),
             )->setDescription('Name of argument in question.'),
-            \Graphpinator\Typesystem\Argument\Argument::create(
+            Argument::create(
                 'equals',
                 $this->anyType,
             )->setDescription('Value for which the field guarantees it does not return null.'),

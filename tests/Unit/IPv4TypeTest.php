@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\IPv4Type;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class IPv4TypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -37,8 +42,8 @@ final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $ipv4 = new \Graphpinator\ExtraTypes\IPv4Type();
-        $value = $ipv4->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $ipv4 = new IPv4Type();
+        $value = $ipv4->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($ipv4, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -50,15 +55,15 @@ final class IPv4TypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $ipv4 = new \Graphpinator\ExtraTypes\IPv4Type();
-        $ipv4->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $ipv4 = new IPv4Type();
+        $ipv4->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\IPv4Type();
+        $type = new IPv4Type();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc4001#section-3', $type->getSpecifiedByUrl());
     }

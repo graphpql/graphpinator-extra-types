@@ -4,13 +4,19 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class RationalNumberType extends \Graphpinator\Typesystem\Type
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
+
+final class RationalNumberType extends Type
 {
     protected const NAME = 'RationalNumberType';
     protected const DESCRIPTION = 'RationalNumber type - structure for numerator and denominator.';
 
     public function __construct(
-        private \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        private ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
@@ -25,19 +31,19 @@ final class RationalNumberType extends \Graphpinator\Typesystem\Type
             && \is_int($rawValue->denominator);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
-        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+        return new ResolvableFieldSet([
+            ResolvableField::create(
                 'numerator',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function(\stdClass $number) : int {
                     return $number->numerator;
                 },
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'denominator',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function(\stdClass $number) : int {
                     return $number->denominator;
                 },

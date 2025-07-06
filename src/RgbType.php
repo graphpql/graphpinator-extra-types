@@ -4,13 +4,19 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class RgbType extends \Graphpinator\Typesystem\Type
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
+
+class RgbType extends Type
 {
     protected const NAME = 'Rgb';
     protected const DESCRIPTION = 'Rgb type - type representing the RGB color model.';
 
     public function __construct(
-        protected \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        protected ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
@@ -27,12 +33,12 @@ class RgbType extends \Graphpinator\Typesystem\Type
             && \is_int($rawValue->blue);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
-        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+        return new ResolvableFieldSet([
+            ResolvableField::create(
                 'red',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->red;
                 },
@@ -40,9 +46,9 @@ class RgbType extends \Graphpinator\Typesystem\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'green',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->green;
                 },
@@ -50,9 +56,9 @@ class RgbType extends \Graphpinator\Typesystem\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'blue',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $rgb) : int {
                     return $rgb->blue;
                 },

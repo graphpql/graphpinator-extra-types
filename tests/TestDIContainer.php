@@ -4,17 +4,55 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests;
 
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\ConstraintDirectives\FloatConstraintDirective;
+use Graphpinator\ConstraintDirectives\IntConstraintDirective;
+use Graphpinator\ConstraintDirectives\ListConstraintDirective;
+use Graphpinator\ConstraintDirectives\ListConstraintInput;
+use Graphpinator\ConstraintDirectives\ObjectConstraintDirective;
+use Graphpinator\ConstraintDirectives\ObjectConstraintInput;
+use Graphpinator\ConstraintDirectives\StringConstraintDirective;
+use Graphpinator\ExtraTypes\AnyType;
+use Graphpinator\ExtraTypes\BigIntType;
+use Graphpinator\ExtraTypes\DateTimeType;
+use Graphpinator\ExtraTypes\DateType;
+use Graphpinator\ExtraTypes\EmailAddressType;
+use Graphpinator\ExtraTypes\GpsInput;
+use Graphpinator\ExtraTypes\GpsType;
+use Graphpinator\ExtraTypes\HslInput;
+use Graphpinator\ExtraTypes\HslType;
+use Graphpinator\ExtraTypes\HslaInput;
+use Graphpinator\ExtraTypes\HslaType;
+use Graphpinator\ExtraTypes\IPv4Type;
+use Graphpinator\ExtraTypes\IPv6Type;
+use Graphpinator\ExtraTypes\JsonType;
+use Graphpinator\ExtraTypes\MacType;
+use Graphpinator\ExtraTypes\PhoneNumberType;
+use Graphpinator\ExtraTypes\PointInput;
+use Graphpinator\ExtraTypes\PointType;
+use Graphpinator\ExtraTypes\PostalCodeType;
+use Graphpinator\ExtraTypes\RgbInput;
+use Graphpinator\ExtraTypes\RgbType;
+use Graphpinator\ExtraTypes\RgbaInput;
+use Graphpinator\ExtraTypes\RgbaType;
+use Graphpinator\ExtraTypes\TimeType;
+use Graphpinator\ExtraTypes\UrlType;
+use Graphpinator\ExtraTypes\VoidType;
+use Graphpinator\SimpleContainer;
+use Graphpinator\Typesystem\Container;
+use Nette\StaticClass;
+
 final class TestDIContainer
 {
-    use \Nette\StaticClass;
+    use StaticClass;
 
     private static array $types = [];
-    private static ?\Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $accessor = null;
-    private static ?\Graphpinator\Typesystem\Container $container = null;
+    private static ?ConstraintDirectiveAccessor $accessor = null;
+    private static ?Container $container = null;
 
-    public static function getTypeContainer() : \Graphpinator\Typesystem\Container
+    public static function getTypeContainer() : Container
     {
-        return new \Graphpinator\SimpleContainer([
+        return new SimpleContainer([
             'Any' => self::getType('Any'),
             'DateTime' => self::getType('DateTime'),
             'Date' => self::getType('Date'),
@@ -58,71 +96,71 @@ final class TestDIContainer
         }
 
         self::$types[$name] = match ($name) {
-            'Any' => new \Graphpinator\ExtraTypes\AnyType(),
-            'DateTime' => new \Graphpinator\ExtraTypes\DateTimeType(),
-            'Date' => new \Graphpinator\ExtraTypes\DateType(),
-            'EmailAddress' => new \Graphpinator\ExtraTypes\EmailAddressType(),
-            'Hsla' => new \Graphpinator\ExtraTypes\HslaType(
+            'Any' => new AnyType(),
+            'DateTime' => new DateTimeType(),
+            'Date' => new DateType(),
+            'EmailAddress' => new EmailAddressType(),
+            'Hsla' => new HslaType(
                 self::getAccessor(),
             ),
-            'HslaInput' => new \Graphpinator\ExtraTypes\HslaInput(
+            'HslaInput' => new HslaInput(
                 self::getAccessor(),
             ),
-            'Hsl' => new \Graphpinator\ExtraTypes\HslType(
+            'Hsl' => new HslType(
                 self::getAccessor(),
             ),
-            'HslInput' => new \Graphpinator\ExtraTypes\HslInput(
+            'HslInput' => new HslInput(
                 self::getAccessor(),
             ),
-            'Ipv4' => new \Graphpinator\ExtraTypes\IPv4Type(),
-            'Ipv6' => new \Graphpinator\ExtraTypes\IPv6Type(),
-            'Json' => new \Graphpinator\ExtraTypes\JsonType(),
-            'Mac' => new \Graphpinator\ExtraTypes\MacType(),
-            'PhoneNumber' => new \Graphpinator\ExtraTypes\PhoneNumberType(),
-            'PostalCode' => new \Graphpinator\ExtraTypes\PostalCodeType(),
-            'Rgba' => new \Graphpinator\ExtraTypes\RgbaType(
+            'Ipv4' => new IPv4Type(),
+            'Ipv6' => new IPv6Type(),
+            'Json' => new JsonType(),
+            'Mac' => new MacType(),
+            'PhoneNumber' => new PhoneNumberType(),
+            'PostalCode' => new PostalCodeType(),
+            'Rgba' => new RgbaType(
                 self::getAccessor(),
             ),
-            'RgbaInput' => new \Graphpinator\ExtraTypes\RgbaInput(
+            'RgbaInput' => new RgbaInput(
                 self::getAccessor(),
             ),
-            'Rgb' => new \Graphpinator\ExtraTypes\RgbType(
+            'Rgb' => new RgbType(
                 self::getAccessor(),
             ),
-            'RgbInput' => new \Graphpinator\ExtraTypes\RgbInput(
+            'RgbInput' => new RgbInput(
                 self::getAccessor(),
             ),
-            'Time' => new \Graphpinator\ExtraTypes\TimeType(),
-            'Url' => new \Graphpinator\ExtraTypes\UrlType(),
-            'Void' => new \Graphpinator\ExtraTypes\VoidType(),
-            'Gps' => new \Graphpinator\ExtraTypes\GpsType(
+            'Time' => new TimeType(),
+            'Url' => new UrlType(),
+            'Void' => new VoidType(),
+            'Gps' => new GpsType(
                 self::getAccessor(),
             ),
-            'GpsInput' => new \Graphpinator\ExtraTypes\GpsInput(
+            'GpsInput' => new GpsInput(
                 self::getAccessor(),
             ),
-            'Point' => new \Graphpinator\ExtraTypes\PointType(),
-            'PointInput' => new \Graphpinator\ExtraTypes\PointInput(),
-            'BigInt' => new \Graphpinator\ExtraTypes\BigIntType(),
-            'ListConstraintInput' => new \Graphpinator\ConstraintDirectives\ListConstraintInput(
+            'Point' => new PointType(),
+            'PointInput' => new PointInput(),
+            'BigInt' => new BigIntType(),
+            'ListConstraintInput' => new ListConstraintInput(
                 self::getAccessor(),
             ),
-            'ObjectConstraintInput' => new \Graphpinator\ConstraintDirectives\ObjectConstraintInput(
+            'ObjectConstraintInput' => new ObjectConstraintInput(
                 self::getAccessor(),
             ),
-            'stringConstraint' => new \Graphpinator\ConstraintDirectives\StringConstraintDirective(
+            'stringConstraint' => new StringConstraintDirective(
                 self::getAccessor(),
             ),
-            'intConstraint' => new \Graphpinator\ConstraintDirectives\IntConstraintDirective(
+            'intConstraint' => new IntConstraintDirective(
                 self::getAccessor(),
             ),
-            'floatConstraint' => new \Graphpinator\ConstraintDirectives\FloatConstraintDirective(
+            'floatConstraint' => new FloatConstraintDirective(
                 self::getAccessor(),
             ),
-            'listConstraint' => new \Graphpinator\ConstraintDirectives\ListConstraintDirective(
+            'listConstraint' => new ListConstraintDirective(
                 self::getAccessor(),
             ),
-            'objectConstraint' => new \Graphpinator\ConstraintDirectives\ObjectConstraintDirective(
+            'objectConstraint' => new ObjectConstraintDirective(
                 self::getAccessor(),
             ),
         };
@@ -130,42 +168,42 @@ final class TestDIContainer
         return self::$types[$name];
     }
 
-    public static function getAccessor() : \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor
+    public static function getAccessor() : ConstraintDirectiveAccessor
     {
         if (self::$accessor === null) {
-            self::$accessor = new class implements \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor
+            self::$accessor = new class implements ConstraintDirectiveAccessor
             {
-                public function getString() : \Graphpinator\ConstraintDirectives\StringConstraintDirective
+                public function getString() : StringConstraintDirective
                 {
                     return TestDIContainer::getType('stringConstraint');
                 }
 
-                public function getInt() : \Graphpinator\ConstraintDirectives\IntConstraintDirective
+                public function getInt() : IntConstraintDirective
                 {
                     return TestDIContainer::getType('intConstraint');
                 }
 
-                public function getFloat() : \Graphpinator\ConstraintDirectives\FloatConstraintDirective
+                public function getFloat() : FloatConstraintDirective
                 {
                     return TestDIContainer::getType('floatConstraint');
                 }
 
-                public function getList() : \Graphpinator\ConstraintDirectives\ListConstraintDirective
+                public function getList() : ListConstraintDirective
                 {
                     return TestDIContainer::getType('listConstraint');
                 }
 
-                public function getListInput() : \Graphpinator\ConstraintDirectives\ListConstraintInput
+                public function getListInput() : ListConstraintInput
                 {
                     return TestDIContainer::getType('ListConstraintInput');
                 }
 
-                public function getObject() : \Graphpinator\ConstraintDirectives\ObjectConstraintDirective
+                public function getObject() : ObjectConstraintDirective
                 {
                     return TestDIContainer::getType('objectConstraint');
                 }
 
-                public function getObjectInput() : \Graphpinator\ConstraintDirectives\ObjectConstraintInput
+                public function getObjectInput() : ObjectConstraintInput
                 {
                     return TestDIContainer::getType('ObjectConstraintInput');
                 }

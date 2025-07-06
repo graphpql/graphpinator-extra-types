@@ -4,21 +4,26 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class PointInput extends \Graphpinator\Typesystem\InputType
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\InputType;
+
+final class PointInput extends InputType
 {
     protected const NAME = 'PointInput';
     protected const DESCRIPTION = 'Point input - input for the Point.';
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
+    protected function getFieldDefinition() : ArgumentSet
     {
-        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
-            new \Graphpinator\Typesystem\Argument\Argument(
+        return new ArgumentSet([
+            new Argument(
                 'x',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
             ),
-            new \Graphpinator\Typesystem\Argument\Argument(
+            new Argument(
                 'y',
-                \Graphpinator\Typesystem\Container::Float()->notNull(),
+                Container::Float()->notNull(),
             ),
         ]);
     }

@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class HslaType extends \Graphpinator\ExtraTypes\HslType
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+
+final class HslaType extends HslType
 {
     protected const NAME = 'Hsla';
     protected const DESCRIPTION = 'Hsla type - type representing the HSL color model with added alpha (transparency).';
@@ -16,13 +20,13 @@ final class HslaType extends \Graphpinator\ExtraTypes\HslType
             && \is_float($rawValue->alpha);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(
-            new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-                \Graphpinator\Typesystem\Field\ResolvableField::create(
+            new ResolvableFieldSet([
+                ResolvableField::create(
                     'alpha',
-                    \Graphpinator\Typesystem\Container::Float()->notNull(),
+                    Container::Float()->notNull(),
                     static function (\stdClass $hsla) : float {
                         return $hsla->alpha;
                     },

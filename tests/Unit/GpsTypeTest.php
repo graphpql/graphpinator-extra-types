@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class GpsTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\Tests\TestDIContainer;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class GpsTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -52,8 +57,8 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(\stdClass $rawValue) : void
     {
-        $gps = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Gps');
-        $value = $gps->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $gps = TestDIContainer::getType('Gps');
+        $value = $gps->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($gps, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -65,9 +70,9 @@ final class GpsTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid(mixed $rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $gps = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Gps');
-        $gps->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $gps = TestDIContainer::getType('Gps');
+        $gps->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

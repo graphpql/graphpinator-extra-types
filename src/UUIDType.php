@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class UUIDType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class UUIDType extends ScalarType
 {
     protected const NAME = 'UUID';
     protected const DESCRIPTION = 'UUID type - string which contains valid UUID (universally unique identifier).';

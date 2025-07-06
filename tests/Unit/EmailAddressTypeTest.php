@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\EmailAddressType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class EmailAddressTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -41,8 +46,8 @@ final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $email = new \Graphpinator\ExtraTypes\EmailAddressType();
-        $value = $email->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $email = new EmailAddressType();
+        $value = $email->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($email, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -54,15 +59,15 @@ final class EmailAddressTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $email = new \Graphpinator\ExtraTypes\EmailAddressType();
-        $email->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $email = new EmailAddressType();
+        $email->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\EmailAddressType();
+        $type = new EmailAddressType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1', $type->getSpecifiedByUrl());
     }

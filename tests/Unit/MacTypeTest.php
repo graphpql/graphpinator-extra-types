@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class MacTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\MacType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class MacTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -52,8 +57,8 @@ final class MacTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $mac = new \Graphpinator\ExtraTypes\MacType();
-        $value = $mac->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $mac = new MacType();
+        $value = $mac->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($mac, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -65,9 +70,9 @@ final class MacTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $mac = new \Graphpinator\ExtraTypes\MacType();
-        $mac->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $mac = new MacType();
+        $mac->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

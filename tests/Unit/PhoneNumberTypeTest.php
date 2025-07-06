@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class PhoneNumberTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\PhoneNumberType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class PhoneNumberTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -54,8 +59,8 @@ final class PhoneNumberTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $phoneNumber = new \Graphpinator\ExtraTypes\PhoneNumberType();
-        $value = $phoneNumber->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $phoneNumber = new PhoneNumberType();
+        $value = $phoneNumber->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($phoneNumber, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -67,15 +72,15 @@ final class PhoneNumberTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $phoneNumber = new \Graphpinator\ExtraTypes\PhoneNumberType();
-        $phoneNumber->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $phoneNumber = new PhoneNumberType();
+        $phoneNumber->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\PhoneNumberType();
+        $type = new PhoneNumberType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc3966#section-5.1', $type->getSpecifiedByUrl());
     }

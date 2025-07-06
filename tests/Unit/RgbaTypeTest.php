@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class RgbaTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\Tests\TestDIContainer;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class RgbaTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -52,8 +57,8 @@ final class RgbaTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue($rawValue) : void
     {
-        $rgba = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgba');
-        $value = $rgba->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $rgba = TestDIContainer::getType('Rgba');
+        $value = $rgba->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($rgba, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -65,9 +70,9 @@ final class RgbaTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $rgba = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgba');
-        $rgba->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $rgba = TestDIContainer::getType('Rgba');
+        $rgba->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

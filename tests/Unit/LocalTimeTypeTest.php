@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\LocalTimeType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class LocalTimeTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -43,8 +48,8 @@ final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $time = new \Graphpinator\ExtraTypes\LocalTimeType();
-        $value = $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $time = new LocalTimeType();
+        $value = $time->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($time, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -56,9 +61,9 @@ final class LocalTimeTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $time = new \Graphpinator\ExtraTypes\LocalTimeType();
-        $time->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $time = new LocalTimeType();
+        $time->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

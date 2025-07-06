@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class IPv4Type extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class IPv4Type extends ScalarType
 {
     protected const NAME = 'Ipv4';
     protected const DESCRIPTION = 'Ipv4 type - string which contains valid IPv4 address.';

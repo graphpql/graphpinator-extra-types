@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class DateTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\DateType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class DateTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -58,8 +63,8 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $date = new \Graphpinator\ExtraTypes\DateType();
-        $value = $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $date = new DateType();
+        $value = $date->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($date, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -71,15 +76,15 @@ final class DateTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $date = new \Graphpinator\ExtraTypes\DateType();
-        $date->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $date = new DateType();
+        $date->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\DateType();
+        $type = new DateType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6', $type->getSpecifiedByUrl());
     }

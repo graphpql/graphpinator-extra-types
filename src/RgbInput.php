@@ -4,38 +4,44 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class RgbInput extends \Graphpinator\Typesystem\InputType
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\InputType;
+
+class RgbInput extends InputType
 {
     protected const NAME = 'RgbInput';
     protected const DESCRIPTION = 'Rgb input - input for the RGB color model.';
 
     public function __construct(
-        protected \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        protected ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
+    protected function getFieldDefinition() : ArgumentSet
     {
-        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
-            \Graphpinator\Typesystem\Argument\Argument::create(
+        return new ArgumentSet([
+            Argument::create(
                 'red',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Typesystem\Argument\Argument::create(
+            Argument::create(
                 'green',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],
             ),
-            \Graphpinator\Typesystem\Argument\Argument::create(
+            Argument::create(
                 'blue',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 255],

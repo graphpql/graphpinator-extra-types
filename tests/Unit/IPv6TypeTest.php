@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\IPv6Type;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class IPv6TypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -65,8 +70,8 @@ final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $ipv6 = new \Graphpinator\ExtraTypes\IPv6Type();
-        $value = $ipv6->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $ipv6 = new IPv6Type();
+        $value = $ipv6->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($ipv6, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -78,15 +83,15 @@ final class IPv6TypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $ipv6 = new \Graphpinator\ExtraTypes\IPv6Type();
-        $ipv6->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $ipv6 = new IPv6Type();
+        $ipv6->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\IPv6Type();
+        $type = new IPv6Type();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc4291#section-2.2', $type->getSpecifiedByUrl());
     }

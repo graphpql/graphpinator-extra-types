@@ -4,28 +4,34 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class RationalNumberInput extends \Graphpinator\Typesystem\InputType
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\InputType;
+
+final class RationalNumberInput extends InputType
 {
     protected const NAME = 'RationalNumberInput';
     protected const DESCRIPTION = 'RationalNumber input - input for the RationalNumber structure.';
 
     public function __construct(
-        private \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        private ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Argument\ArgumentSet
+    protected function getFieldDefinition() : ArgumentSet
     {
-        return new \Graphpinator\Typesystem\Argument\ArgumentSet([
-            \Graphpinator\Typesystem\Argument\Argument::create(
+        return new ArgumentSet([
+            Argument::create(
                 'numerator',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
             ),
-            \Graphpinator\Typesystem\Argument\Argument::create(
+            Argument::create(
                 'denominator',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
             )->addDirective(
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 1],

@@ -4,9 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class DateTimeMsType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+use Graphpinator\Typesystem\ScalarType;
+
+final class DateTimeMsType extends ScalarType
 {
-    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+    use TDateTimeValidate;
 
     protected const NAME = 'DateTimeMs';
     protected const DESCRIPTION = 'DateTimeMs type - string which contains valid date in ISO8601 format.';

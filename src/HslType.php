@@ -4,13 +4,19 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-class HslType extends \Graphpinator\Typesystem\Type
+use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
+
+class HslType extends Type
 {
     protected const NAME = 'Hsl';
     protected const DESCRIPTION = 'Hsl type - type representing the HSL color model.';
 
     public function __construct(
-        protected \Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor $constraintDirectiveAccessor,
+        protected ConstraintDirectiveAccessor $constraintDirectiveAccessor,
     )
     {
         parent::__construct();
@@ -27,12 +33,12 @@ class HslType extends \Graphpinator\Typesystem\Type
             && \is_int($rawValue->lightness);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
-        return new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+        return new ResolvableFieldSet([
+            ResolvableField::create(
                 'hue',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->hue;
                 },
@@ -40,9 +46,9 @@ class HslType extends \Graphpinator\Typesystem\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 360],
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'saturation',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->saturation;
                 },
@@ -50,9 +56,9 @@ class HslType extends \Graphpinator\Typesystem\Type
                 $this->constraintDirectiveAccessor->getInt(),
                 ['min' => 0, 'max' => 100],
             ),
-            \Graphpinator\Typesystem\Field\ResolvableField::create(
+            ResolvableField::create(
                 'lightness',
-                \Graphpinator\Typesystem\Container::Int()->notNull(),
+                Container::Int()->notNull(),
                 static function (\stdClass $hsl) : int {
                     return $hsl->lightness;
                 },

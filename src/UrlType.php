@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class UrlType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class UrlType extends ScalarType
 {
     protected const NAME = 'Url';
     protected const DESCRIPTION = 'Url type - string which contains valid URL (Uniform Resource Locator).';

@@ -4,9 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class DateType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+use Graphpinator\Typesystem\ScalarType;
+
+final class DateType extends ScalarType
 {
-    use \Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
+    use TDateTimeValidate;
 
     protected const NAME = 'Date';
     protected const DESCRIPTION = 'Date type - string which contains valid date in "<YYYY>-<MM>-<DD>" format.';

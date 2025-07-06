@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class RgbTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\Tests\TestDIContainer;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class RgbTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -48,8 +53,8 @@ final class RgbTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue($rawValue) : void
     {
-        $rgb = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgb');
-        $value = $rgb->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $rgb = TestDIContainer::getType('Rgb');
+        $value = $rgb->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($rgb, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -61,9 +66,9 @@ final class RgbTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $rgb = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Rgb');
-        $rgb->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $rgb = TestDIContainer::getType('Rgb');
+        $rgb->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

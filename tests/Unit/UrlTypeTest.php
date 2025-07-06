@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class UrlTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\UrlType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class UrlTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -105,8 +110,8 @@ final class UrlTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(string $rawValue) : void
     {
-        $url = new \Graphpinator\ExtraTypes\UrlType();
-        $value = $url->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $url = new UrlType();
+        $value = $url->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($url, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -118,15 +123,15 @@ final class UrlTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $url = new \Graphpinator\ExtraTypes\UrlType();
-        $url->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $url = new UrlType();
+        $url->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\UrlType();
+        $type = new UrlType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc3986', $type->getSpecifiedByUrl());
     }

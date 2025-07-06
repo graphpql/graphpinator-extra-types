@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class JsonTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\JsonType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class JsonTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -33,8 +38,8 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue($rawValue) : void
     {
-        $json = new \Graphpinator\ExtraTypes\JsonType();
-        $value = $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $json = new JsonType();
+        $value = $json->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($json, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -46,15 +51,15 @@ final class JsonTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $json = new \Graphpinator\ExtraTypes\JsonType();
-        $json->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $json = new JsonType();
+        $json->accept(new CreateResolvedValueVisitor($rawValue));
     }
 
     public function testSpecifiedBy() : void
     {
-        $type = new \Graphpinator\ExtraTypes\JsonType();
+        $type = new JsonType();
 
         self::assertSame('https://datatracker.ietf.org/doc/html/rfc7159', $type->getSpecifiedByUrl());
     }

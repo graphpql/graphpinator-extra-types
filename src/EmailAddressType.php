@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class EmailAddressType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+
+final class EmailAddressType extends ScalarType
 {
     protected const NAME = 'EmailAddress';
     protected const DESCRIPTION = 'EmailAddress type - string which contains valid email address.';

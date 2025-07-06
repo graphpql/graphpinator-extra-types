@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class PointTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\PointType;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class PointTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -42,8 +47,8 @@ final class PointTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue(\stdClass $rawValue) : void
     {
-        $point = new \Graphpinator\ExtraTypes\PointType();
-        $value = $point->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $point = new PointType();
+        $value = $point->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($point, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -55,9 +60,9 @@ final class PointTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $point = new \Graphpinator\ExtraTypes\PointType();
-        $point->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $point = new PointType();
+        $point->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

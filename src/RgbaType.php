@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class RgbaType extends \Graphpinator\ExtraTypes\RgbType
+use Graphpinator\Typesystem\Container;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+
+final class RgbaType extends RgbType
 {
     protected const NAME = 'Rgba';
     protected const DESCRIPTION = 'Rgba type - type representing the RGB color model with added alpha (transparency).';
@@ -16,13 +20,13 @@ final class RgbaType extends \Graphpinator\ExtraTypes\RgbType
             && \is_float($rawValue->alpha);
     }
 
-    protected function getFieldDefinition() : \Graphpinator\Typesystem\Field\ResolvableFieldSet
+    protected function getFieldDefinition() : ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(
-            new \Graphpinator\Typesystem\Field\ResolvableFieldSet([
-                \Graphpinator\Typesystem\Field\ResolvableField::create(
+            new ResolvableFieldSet([
+                ResolvableField::create(
                     'alpha',
-                    \Graphpinator\Typesystem\Container::Float()->notNull(),
+                    Container::Float()->notNull(),
                     static function (\stdClass $rgba) : float {
                         return $rgba->alpha;
                     },

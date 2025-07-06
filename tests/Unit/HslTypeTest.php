@@ -4,7 +4,12 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-final class HslTypeTest extends \PHPUnit\Framework\TestCase
+use Graphpinator\Exception\Value\InvalidValue;
+use Graphpinator\ExtraTypes\Tests\TestDIContainer;
+use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use PHPUnit\Framework\TestCase;
+
+final class HslTypeTest extends TestCase
 {
     public static function simpleDataProvider() : array
     {
@@ -47,8 +52,8 @@ final class HslTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValue($rawValue) : void
     {
-        $hsl = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Hsl');
-        $value = $hsl->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $hsl = TestDIContainer::getType('Hsl');
+        $value = $hsl->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($hsl, $value->getType());
         self::assertSame($rawValue, $value->getRawValue());
@@ -60,9 +65,9 @@ final class HslTypeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateValueInvalid($rawValue) : void
     {
-        $this->expectException(\Graphpinator\Exception\Value\InvalidValue::class);
+        $this->expectException(InvalidValue::class);
 
-        $hsl = \Graphpinator\ExtraTypes\Tests\TestDIContainer::getType('Hsl');
-        $hsl->accept(new \Graphpinator\Resolver\CreateResolvedValueVisitor($rawValue));
+        $hsl = TestDIContainer::getType('Hsl');
+        $hsl->accept(new CreateResolvedValueVisitor($rawValue));
     }
 }

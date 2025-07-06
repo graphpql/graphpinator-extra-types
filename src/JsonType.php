@@ -4,7 +4,10 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-final class JsonType extends \Graphpinator\Typesystem\ScalarType
+use Graphpinator\Typesystem\ScalarType;
+use Infinityloop\Utils\Json;
+
+final class JsonType extends ScalarType
 {
     protected const NAME = 'Json';
     protected const DESCRIPTION = 'Json type - string which contains valid JSON.';
@@ -20,7 +23,7 @@ final class JsonType extends \Graphpinator\Typesystem\ScalarType
     {
         try {
             return \is_string($rawValue)
-                && \Infinityloop\Utils\Json::fromString($rawValue)->toNative();
+                && Json::fromString($rawValue)->toNative();
         } catch (\JsonException) {
             return false;
         }
