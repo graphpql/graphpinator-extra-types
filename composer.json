@@ -31,8 +31,8 @@
     "phpstan": "phpstan analyze --level 8 src",
     "phpstan-next": "phpstan analyze --level 8 src",
     "phpstan-max": "phpstan analyze --level max src",
-    "codestyle": "phpcs --standard=vendor/infinityloop-dev/coding-standard/InfinityloopCodingStandard/ruleset.xml --extensions=php src tests",
-    "codestyle-fix": "phpcbf --standard=vendor/infinityloop-dev/coding-standard/InfinityloopCodingStandard/ruleset.xml --extensions=php src tests"
+    "codestyle": "phpcs src tests",
+    "codestyle-fix": "phpcbf src tests"
   },
   "autoload": {
     "psr-4": {

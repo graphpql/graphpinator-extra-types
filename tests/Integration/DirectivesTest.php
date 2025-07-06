@@ -7,13 +7,7 @@ namespace Graphpinator\ExtraTypes\Tests\Integration;
 use Graphpinator\ConstraintDirectives\Exception\ConstraintError;
 use Graphpinator\Graphpinator;
 use Graphpinator\Request\JsonRequestFactory;
-use Graphpinator\Typesystem\Argument\Argument;
-use Graphpinator\Typesystem\Argument\ArgumentSet;
-use Graphpinator\Typesystem\Container;
-use Graphpinator\Typesystem\Field\ResolvableField;
-use Graphpinator\Typesystem\Field\ResolvableFieldSet;
 use Graphpinator\Typesystem\Schema;
-use Graphpinator\Typesystem\Type;
 use Infinityloop\Utils\Json;
 use PHPUnit\Framework\TestCase;
 
