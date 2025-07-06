@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Graphpinator\ExtraTypes\Tests;
+namespace Graphpinator\ExtraTypes\Tests\Integration;
 
 use Graphpinator\ConstraintDirectives\ConstraintDirectiveAccessor;
 use Graphpinator\ConstraintDirectives\FloatConstraintDirective;
@@ -39,16 +39,17 @@ use Graphpinator\ExtraTypes\TimeType;
 use Graphpinator\ExtraTypes\UrlType;
 use Graphpinator\ExtraTypes\VoidType;
 use Graphpinator\SimpleContainer;
+use Graphpinator\Typesystem\Argument\Argument;
+use Graphpinator\Typesystem\Argument\ArgumentSet;
 use Graphpinator\Typesystem\Container;
-use Nette\StaticClass;
+use Graphpinator\Typesystem\Field\ResolvableField;
+use Graphpinator\Typesystem\Field\ResolvableFieldSet;
+use Graphpinator\Typesystem\Type;
 
 final class TestDIContainer
 {
-    use StaticClass;
-
     private static array $types = [];
     private static ?ConstraintDirectiveAccessor $accessor = null;
-    private static ?Container $container = null;
 
     public static function getTypeContainer() : Container
     {
@@ -79,6 +80,7 @@ final class TestDIContainer
             'Point' => self::getType('Point'),
             'PointInput' => self::getType('PointInput'),
             'BigInt' => self::getType('BigInt'),
+            'Query' => self::getType('Query'),
         ], [
             'ListConstraintInput' => self::getType('ListConstraintInput'),
             'stringConstraint' => self::getType('stringConstraint'),
@@ -142,6 +144,7 @@ final class TestDIContainer
             'Point' => new PointType(),
             'PointInput' => new PointInput(),
             'BigInt' => new BigIntType(),
+            'Query' => self::getQuery(),
             'ListConstraintInput' => new ListConstraintInput(
                 self::getAccessor(),
             ),
@@ -211,5 +214,167 @@ final class TestDIContainer
         }
 
         return self::$accessor;
+    }
+
+    private static function getQuery() : Type
+    {
+        return new class extends Type {
+            protected const NAME = 'Query';
+
+            public function validateNonNullValue(mixed $rawValue) : bool
+            {
+                return true;
+            }
+
+            protected function getFieldDefinition() : ResolvableFieldSet
+            {
+                return new ResolvableFieldSet([
+                    ResolvableField::create(
+                        'hslField',
+                        TestDIContainer::getType('Hsl'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'hslaField',
+                        TestDIContainer::getType('Hsla'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'rgbField',
+                        TestDIContainer::getType('Rgb'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'rgbaField',
+                        TestDIContainer::getType('Rgba'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'gpsField',
+                        TestDIContainer::getType('Gps'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'pointField',
+                        TestDIContainer::getType('Point'),
+                        static function ($parent, string $input) : \stdClass {
+                            return \json_decode($input);
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('Json')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'hslInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('HslInput')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'hslaInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('HslaInput')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'rgbInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('RgbInput')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'rgbaInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('RgbaInput')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'gpsInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('GpsInput')->notNull(),
+                        ),
+                    ])),
+                    ResolvableField::create(
+                        'pointInput',
+                        Container::Int(),
+                        static function ($parent, \stdClass $input) : int {
+                            return 1;
+                        },
+                    )->setArguments(new ArgumentSet([
+                        Argument::create(
+                            'input',
+                            TestDIContainer::getType('PointInput')->notNull(),
+                        ),
+                    ])),
+                ]);
+            }
+        };
     }
 }

@@ -8,10 +8,10 @@ trait TDateTimeValidate
 {
     private function isValid(string $value, string $format) : bool
     {
-        $dateTime = \DateTime::createFromFormat($format, $value);
+        $dateTime = \DateTimeImmutable::createFromFormat($format, $value);
         $errors = \DateTimeImmutable::getLastErrors();
 
-        return $dateTime instanceof \DateTime
+        return $dateTime instanceof \DateTimeImmutable
             && ($errors === false || ($errors['error_count'] === 0 && $errors['warning_count'] === 0));
     }
 }

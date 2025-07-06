@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
 use Graphpinator\Exception\Value\InvalidValue;
-use Graphpinator\ExtraTypes\Tests\TestDIContainer;
+use Graphpinator\ExtraTypes\Tests\Integration\TestDIContainer;
 use Graphpinator\Resolver\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
