@@ -41,6 +41,8 @@ This package contains the following types:
     - Datetime in "YYYY-MM-DD HH:MM:SS" format (without the timezone information).
 - `\Graphpinator\ExtraTypes\LocalTimeType`
     - Time in "HH:MM:SS" format (without the timezone information).
+- `\Graphpinator\ExtraTypes\LocalTimeEndType`
+  - Time in "HH:MM:SS" format (without the timezone information), including a special 24:00:00 value for usage in intervals.
 - `\Graphpinator\ExtraTypes\JsonType`
     - Valid JSON.
 - `\Graphpinator\ExtraTypes\EmailAddressType`
