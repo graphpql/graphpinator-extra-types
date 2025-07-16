@@ -21,9 +21,14 @@ final class JsonType extends ScalarType
 
     public function validateNonNullValue(mixed $rawValue) : bool
     {
+        if (!\is_string($rawValue)) {
+            return false;
+        }
+
         try {
-            return \is_string($rawValue)
-                && Json::fromString($rawValue)->toNative();
+            Json::fromString($rawValue)->toNative();
+
+            return true;
         } catch (\JsonException) {
             return false;
         }
