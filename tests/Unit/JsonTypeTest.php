@@ -16,6 +16,7 @@ final class JsonTypeTest extends TestCase
         return [
             ['{"class":"test"}'],
             ['{"testName":"testValue"}'],
+            ['[]'],
         ];
     }
 
