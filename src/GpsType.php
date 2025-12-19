@@ -22,6 +22,7 @@ final class GpsType extends Type
         parent::__construct();
     }
 
+    #[\Override]
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return $rawValue instanceof \stdClass
@@ -31,6 +32,7 @@ final class GpsType extends Type
             && \is_float($rawValue->lng);
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ResolvableFieldSet
     {
         return new ResolvableFieldSet([

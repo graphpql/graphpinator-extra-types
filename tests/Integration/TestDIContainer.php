@@ -45,6 +45,7 @@ use Graphpinator\Typesystem\Container;
 use Graphpinator\Typesystem\Field\ResolvableField;
 use Graphpinator\Typesystem\Field\ResolvableFieldSet;
 use Graphpinator\Typesystem\Type;
+use Infinityloop\Utils\Json;
 
 final class TestDIContainer
 {
@@ -232,8 +233,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'hslField',
                         TestDIContainer::getType('Hsl'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(
@@ -244,8 +245,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'hslaField',
                         TestDIContainer::getType('Hsla'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(
@@ -256,8 +257,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'rgbField',
                         TestDIContainer::getType('Rgb'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(
@@ -268,8 +269,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'rgbaField',
                         TestDIContainer::getType('Rgba'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(
@@ -280,8 +281,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'gpsField',
                         TestDIContainer::getType('Gps'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(
@@ -292,8 +293,8 @@ final class TestDIContainer
                     ResolvableField::create(
                         'pointField',
                         TestDIContainer::getType('Point'),
-                        static function ($parent, string $input) : \stdClass {
-                            return \json_decode($input);
+                        static function ($parent, Json $input) : \stdClass {
+                            return $input->toNative();
                         },
                     )->setArguments(new ArgumentSet([
                         Argument::create(

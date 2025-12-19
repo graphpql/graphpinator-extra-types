@@ -13,6 +13,7 @@ final class HslaType extends HslType
     protected const NAME = 'Hsla';
     protected const DESCRIPTION = 'Hsla type - type representing the HSL color model with added alpha (transparency).';
 
+    #[\Override]
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return parent::validateNonNullValue($rawValue)
@@ -20,6 +21,7 @@ final class HslaType extends HslType
             && \is_float($rawValue->alpha);
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(

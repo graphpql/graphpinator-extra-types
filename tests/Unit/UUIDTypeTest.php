@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-use Graphpinator\Exception\Value\InvalidValue;
 use Graphpinator\ExtraTypes\UUIDType;
-use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use Graphpinator\Value\Exception\InvalidValue;
+use Graphpinator\Value\Visitor\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class UUIDTypeTest extends TestCase

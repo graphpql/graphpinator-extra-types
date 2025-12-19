@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-use Graphpinator\Exception\Value\InvalidValue;
 use Graphpinator\ExtraTypes\JsonType;
-use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use Graphpinator\Value\Exception\InvalidValue;
+use Graphpinator\Value\Visitor\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class JsonTypeTest extends TestCase
@@ -43,7 +43,7 @@ final class JsonTypeTest extends TestCase
         $value = $json->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($json, $value->getType());
-        self::assertSame($rawValue, $value->getRawValue());
+        self::assertSame($rawValue, $value->jsonSerialize());
     }
 
     /**

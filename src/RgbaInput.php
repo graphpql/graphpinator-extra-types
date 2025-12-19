@@ -13,6 +13,7 @@ final class RgbaInput extends RgbInput
     protected const NAME = 'RgbaInput';
     protected const DESCRIPTION = 'Rgb input - input for the RGB color model with added alpha (transparency).';
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return parent::getFieldDefinition()->merge(

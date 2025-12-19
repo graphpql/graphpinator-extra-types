@@ -22,6 +22,7 @@ class HslInput extends InputType
         parent::__construct();
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet([

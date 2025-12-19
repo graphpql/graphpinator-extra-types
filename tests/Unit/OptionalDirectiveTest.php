@@ -12,8 +12,8 @@ use Graphpinator\Typesystem\Argument\Argument;
 use Graphpinator\Typesystem\Argument\ArgumentSet;
 use Graphpinator\Typesystem\Container;
 use Graphpinator\Typesystem\InputType;
-use Graphpinator\Value\ConvertRawValueVisitor;
 use Graphpinator\Value\InputValue;
+use Graphpinator\Value\Visitor\ConvertRawValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class OptionalDirectiveTest extends TestCase

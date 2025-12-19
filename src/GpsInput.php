@@ -22,6 +22,7 @@ final class GpsInput extends InputType
         parent::__construct();
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet([

@@ -13,6 +13,7 @@ final class RgbaType extends RgbType
     protected const NAME = 'Rgba';
     protected const DESCRIPTION = 'Rgba type - type representing the RGB color model with added alpha (transparency).';
 
+    #[\Override]
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return parent::validateNonNullValue($rawValue)
@@ -20,6 +21,7 @@ final class RgbaType extends RgbType
             && \is_float($rawValue->alpha);
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ResolvableFieldSet
     {
         return parent::getFieldDefinition()->merge(

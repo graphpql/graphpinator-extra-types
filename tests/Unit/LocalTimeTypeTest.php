@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-use Graphpinator\Exception\Value\InvalidValue;
 use Graphpinator\ExtraTypes\LocalTimeType;
-use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use Graphpinator\Value\Exception\InvalidValue;
+use Graphpinator\Value\Visitor\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class LocalTimeTypeTest extends TestCase
@@ -52,7 +52,7 @@ final class LocalTimeTypeTest extends TestCase
         $value = $time->accept(new CreateResolvedValueVisitor($rawValue));
 
         self::assertSame($time, $value->getType());
-        self::assertSame($rawValue, $value->getRawValue());
+        self::assertSame($rawValue, $value->jsonSerialize());
     }
 
     /**

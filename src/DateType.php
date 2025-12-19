@@ -4,25 +4,27 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
-use Graphpinator\ExtraTypes\Trait\TDateTimeValidate;
-use Graphpinator\Typesystem\ScalarType;
+use Graphpinator\Typesystem\Attribute\Description;
 
-final class DateType extends ScalarType
+#[Description('Date type - string which contains valid date in "<YYYY>-<MM>-<DD>" format.')]
+final class DateType extends BaseDateType
 {
-    use TDateTimeValidate;
-
     protected const NAME = 'Date';
-    protected const DESCRIPTION = 'Date type - string which contains valid date in "<YYYY>-<MM>-<DD>" format.';
 
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct('Y-m-d');
 
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc3339#section-5.6');
     }
 
-    public function validateNonNullValue(mixed $rawValue) : bool
+    #[\Override]
+    public function validateAndCoerceInput(mixed $rawValue) : ?\DateTimeImmutable
     {
-        return \is_string($rawValue) && $this->isValid($rawValue, 'Y-m-d');
+        $date = parent::validateAndCoerceInput($rawValue);
+
+        return $date instanceof \DateTimeImmutable
+            ? $date->setTime(0, 0)
+            : null;
     }
 }

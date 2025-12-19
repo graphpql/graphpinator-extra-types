@@ -4,13 +4,17 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
+use Graphpinator\Typesystem\Attribute\Description;
 use Graphpinator\Typesystem\ScalarType;
 use Infinityloop\Utils\Json;
 
+/**
+ * @extends ScalarType<Json>
+ */
+#[Description('Json type - string which contains valid JSON.')]
 final class JsonType extends ScalarType
 {
     protected const NAME = 'Json';
-    protected const DESCRIPTION = 'Json type - string which contains valid JSON.';
 
     public function __construct()
     {
@@ -19,18 +23,26 @@ final class JsonType extends ScalarType
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc7159');
     }
 
-    public function validateNonNullValue(mixed $rawValue) : bool
+    #[\Override]
+    public function validateAndCoerceInput(mixed $rawValue) : ?Json
     {
         if (!\is_string($rawValue)) {
-            return false;
+            return null;
         }
 
         try {
-            Json::fromString($rawValue)->toNative();
+            $json = Json::fromString($rawValue);
+            $json->toNative(); // trigger decoding
 
-            return true;
+            return $json;
         } catch (\JsonException) {
-            return false;
+            return null;
         }
+    }
+
+    #[\Override]
+    public function coerceOutput(mixed $rawValue) : string
+    {
+        return $rawValue->toString();
     }
 }

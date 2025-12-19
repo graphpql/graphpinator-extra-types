@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-use Graphpinator\Exception\Value\InvalidValue;
 use Graphpinator\ExtraTypes\DateType;
-use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use Graphpinator\Value\Exception\InvalidValue;
+use Graphpinator\Value\Visitor\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class DateTypeTest extends TestCase
@@ -66,8 +66,12 @@ final class DateTypeTest extends TestCase
         $date = new DateType();
         $value = $date->accept(new CreateResolvedValueVisitor($rawValue));
 
+        $objectValue = $value->getRawValue();
+        \assert($objectValue instanceof \DateTimeImmutable);
+        self::assertSame($objectValue->format('H'), '00');
+
         self::assertSame($date, $value->getType());
-        self::assertSame($rawValue, $value->getRawValue());
+        self::assertSame($rawValue, $value->jsonSerialize());
     }
 
     /**

@@ -4,12 +4,16 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes;
 
+use Graphpinator\Typesystem\Attribute\Description;
 use Graphpinator\Typesystem\ScalarType;
 
+/**
+ * @extends ScalarType<string>
+ */
+#[Description('Url type - string which contains valid URL (Uniform Resource Locator).')]
 final class UrlType extends ScalarType
 {
     protected const NAME = 'Url';
-    protected const DESCRIPTION = 'Url type - string which contains valid URL (Uniform Resource Locator).';
 
     public function __construct()
     {
@@ -18,9 +22,17 @@ final class UrlType extends ScalarType
         $this->setSpecifiedBy('https://datatracker.ietf.org/doc/html/rfc3986');
     }
 
-    public function validateNonNullValue(mixed $rawValue) : bool
+    #[\Override]
+    public function validateAndCoerceInput(mixed $rawValue) : ?string
     {
-        return \is_string($rawValue)
-            && (bool) \filter_var($rawValue, \FILTER_VALIDATE_URL);
+        return \is_string($rawValue) && (bool) \filter_var($rawValue, \FILTER_VALIDATE_URL)
+            ? $rawValue
+            : null;
+    }
+
+    #[\Override]
+    public function coerceOutput(mixed $rawValue) : string
+    {
+        return $rawValue;
     }
 }

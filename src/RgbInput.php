@@ -22,6 +22,7 @@ class RgbInput extends InputType
         parent::__construct();
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet([

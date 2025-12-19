@@ -11,7 +11,7 @@ use Graphpinator\Typesystem\Directive;
 use Graphpinator\Typesystem\Location\ArgumentDefinitionLocation;
 use Graphpinator\Value\ArgumentValue;
 use Graphpinator\Value\ArgumentValueSet;
-use Graphpinator\Value\NullInputedValue;
+use Graphpinator\Value\NullValue;
 
 final class OptionalDirective extends Directive implements
     ArgumentDefinitionLocation
@@ -19,23 +19,20 @@ final class OptionalDirective extends Directive implements
     protected const NAME = 'optional';
     protected const DESCRIPTION = 'Input value for this argument can be either omitted or have non-null value.';
 
+    #[\Override]
     public static function isPure() : bool
     {
         return true;
     }
 
-    public function validateArgumentUsage(
-        Argument $argument,
-        ArgumentValueSet $arguments,
-    ) : bool
+    #[\Override]
+    public function validateArgumentUsage(Argument $argument, ArgumentValueSet $arguments) : bool
     {
         return true;
     }
 
-    public function validateVariance(
-        ?ArgumentValueSet $biggerSet,
-        ?ArgumentValueSet $smallerSet,
-    ) : void
+    #[\Override]
+    public function validateVariance(?ArgumentValueSet $biggerSet, ?ArgumentValueSet $smallerSet) : void
     {
         if ($biggerSet instanceof ArgumentValueSet &&
             $smallerSet instanceof ArgumentValueSet &&
@@ -46,15 +43,14 @@ final class OptionalDirective extends Directive implements
         throw new \Exception();
     }
 
-    public function resolveArgumentDefinition(
-        ArgumentValueSet $arguments,
-        ArgumentValue $argumentValue,
-    ) : void
+    #[\Override]
+    public function resolveArgumentDefinition(ArgumentValueSet $arguments, ArgumentValue $argumentValue) : void
     {
-        if ($argumentValue->getValue() instanceof NullInputedValue) {
+        if ($argumentValue->getValue() instanceof NullValue) {
             throw new class extends GraphpinatorBase {
                 public const MESSAGE = 'Input field is @optional and therefore cannot contain null value.';
 
+                #[\Override]
                 public function isOutputable() : bool
                 {
                     return true;
@@ -63,6 +59,7 @@ final class OptionalDirective extends Directive implements
         }
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet();

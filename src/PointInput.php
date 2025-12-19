@@ -14,6 +14,7 @@ final class PointInput extends InputType
     protected const NAME = 'PointInput';
     protected const DESCRIPTION = 'Point input - input for the Point.';
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet([

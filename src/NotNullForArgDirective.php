@@ -28,6 +28,7 @@ final class NotNullForArgDirective extends Directive implements
     {
     }
 
+    #[\Override]
     public function validateFieldUsage(
         Field $field,
         ArgumentValueSet $arguments,
@@ -38,6 +39,7 @@ final class NotNullForArgDirective extends Directive implements
             && !$field->getType() instanceof NotNullType;
     }
 
+    #[\Override]
     public function validateVariance(
         ?ArgumentValueSet $biggerSet,
         ?ArgumentValueSet $smallerSet,
@@ -52,6 +54,7 @@ final class NotNullForArgDirective extends Directive implements
         throw new \Exception();
     }
 
+    #[\Override]
     public function resolveFieldDefinitionStart(
         ArgumentValueSet $arguments,
         ResolvedValue $parentValue,
@@ -60,6 +63,7 @@ final class NotNullForArgDirective extends Directive implements
         // nothing here
     }
 
+    #[\Override]
     public function resolveFieldDefinitionBefore(
         ArgumentValueSet $arguments,
         ResolvedValue $parentValue,
@@ -69,6 +73,7 @@ final class NotNullForArgDirective extends Directive implements
         // nothing here
     }
 
+    #[\Override]
     public function resolveFieldDefinitionAfter(
         ArgumentValueSet $arguments,
         ResolvedValue $resolvedValue,
@@ -88,6 +93,7 @@ final class NotNullForArgDirective extends Directive implements
         }
     }
 
+    #[\Override]
     public function resolveFieldDefinitionValue(
         ArgumentValueSet $arguments,
         FieldValue $fieldValue,
@@ -96,6 +102,7 @@ final class NotNullForArgDirective extends Directive implements
         // nothing here
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return new ArgumentSet([

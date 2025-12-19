@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Graphpinator\ExtraTypes\Tests\Unit;
 
-use Graphpinator\Exception\Value\InvalidValue;
 use Graphpinator\ExtraTypes\Tests\Integration\TestDIContainer;
-use Graphpinator\Resolver\CreateResolvedValueVisitor;
+use Graphpinator\Value\Exception\InvalidValue;
+use Graphpinator\Value\Visitor\CreateResolvedValueVisitor;
 use PHPUnit\Framework\TestCase;
 
 final class RgbaTypeTest extends TestCase

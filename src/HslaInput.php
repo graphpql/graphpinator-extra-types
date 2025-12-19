@@ -13,6 +13,7 @@ final class HslaInput extends HslInput
     protected const NAME = 'HslaInput';
     protected const DESCRIPTION = 'Hsla input - input for the HSL color model with added alpha (transparency).';
 
+    #[\Override]
     protected function getFieldDefinition() : ArgumentSet
     {
         return parent::getFieldDefinition()->merge(

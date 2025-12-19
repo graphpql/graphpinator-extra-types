@@ -14,6 +14,7 @@ final class PointType extends Type
     protected const NAME = 'Point';
     protected const DESCRIPTION = 'Point type - x and y coordinates.';
 
+    #[\Override]
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return $rawValue instanceof \stdClass
@@ -23,6 +24,7 @@ final class PointType extends Type
             && \is_float($rawValue->y);
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ResolvableFieldSet
     {
         return new ResolvableFieldSet([

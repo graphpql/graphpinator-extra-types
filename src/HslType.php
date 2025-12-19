@@ -22,6 +22,7 @@ class HslType extends Type
         parent::__construct();
     }
 
+    #[\Override]
     public function validateNonNullValue(mixed $rawValue) : bool
     {
         return $rawValue instanceof \stdClass
@@ -33,6 +34,7 @@ class HslType extends Type
             && \is_int($rawValue->lightness);
     }
 
+    #[\Override]
     protected function getFieldDefinition() : ResolvableFieldSet
     {
         return new ResolvableFieldSet([
