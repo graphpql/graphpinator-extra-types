@@ -14,7 +14,7 @@
   "require": {
     "php": ">=8.2",
     "ext-filter": "*",
-    "infinityloop-dev/graphpinator": "^2.0",
+    "infinityloop-dev/graphpinator": "^2.0 || ^2.0",
     "infinityloop-dev/graphpinator-constraint-directives": "^2.0",
     "infinityloop-dev/utils": "^2.3",
     "infinityloop-dev/graphpinator-common": "^2.0"

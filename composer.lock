@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d39dc6dec9a94a3c3c59f3743d0c4cd1",
+    "content-hash": "83c602dea538ea1604154704d26da202",
     "packages": [
         {
             "name": "infinityloop-dev/graphpinator",
-            "version": "v2.0-rc3",
+            "version": "v2.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/graphpql/graphpinator.git",
-                "reference": "51b794e80e0f3ca845f43278d78388a0fc1553a1"
+                "reference": "2a42cc600a332fb361cc002de2cfcc05ecf6c275"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/graphpql/graphpinator/zipball/51b794e80e0f3ca845f43278d78388a0fc1553a1",
-                "reference": "51b794e80e0f3ca845f43278d78388a0fc1553a1",
+                "url": "https://api.github.com/repos/graphpql/graphpinator/zipball/2a42cc600a332fb361cc002de2cfcc05ecf6c275",
+                "reference": "2a42cc600a332fb361cc002de2cfcc05ecf6c275",
                 "shasum": ""
             },
             "require": {
@@ -32,13 +32,13 @@
             },
             "require-dev": {
                 "guzzlehttp/psr7": "^2.8",
-                "infection/infection": "^0.29",
+                "infection/infection": "^0.29 || ^0.31",
                 "infinityloop-dev/graphpinator-tokenizer": "^1.3",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^2.0",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
-                "phpunit/phpunit": "^10.4",
+                "phpunit/phpunit": "^12.4",
                 "shipmonk/composer-dependency-analyser": "^1.8",
                 "thecodingmachine/phpstan-safe-rule": "^1.4",
                 "webthinx/codestyle": "^1.1"
@@ -74,9 +74,9 @@
             "homepage": "https://github.com/graphpql/",
             "support": {
                 "issues": "https://github.com/graphpql/graphpinator/issues",
-                "source": "https://github.com/graphpql/graphpinator/tree/v2.0-rc3"
+                "source": "https://github.com/graphpql/graphpinator/tree/v2.0-rc5"
             },
-            "time": "2025-12-18T21:44:11+00:00"
+            "time": "2025-12-23T22:46:42+00:00"
         },
         {
             "name": "infinityloop-dev/graphpinator-common",
@@ -5143,7 +5143,9 @@
     ],
     "aliases": [],
     "minimum-stability": "RC",
-    "stability-flags": {},
+    "stability-flags": {
+        "infinityloop-dev/graphpinator": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
