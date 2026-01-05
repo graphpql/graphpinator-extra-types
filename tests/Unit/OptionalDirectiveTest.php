@@ -13,6 +13,7 @@ use Graphpinator\Typesystem\Argument\ArgumentSet;
 use Graphpinator\Typesystem\Container;
 use Graphpinator\Typesystem\InputType;
 use Graphpinator\Value\InputValue;
+use Graphpinator\Value\Visitor\ApplyVariablesVisitor;
 use Graphpinator\Value\Visitor\ConvertRawValueVisitor;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +24,7 @@ final class OptionalDirectiveTest extends TestCase
         $value = self::getInput()->accept(
             new ConvertRawValueVisitor((object) ['arg1' => 'Value'], new Path()),
         );
-        $value->applyVariables(new VariableValueSet([]));
+        $value->accept(new ApplyVariablesVisitor(new VariableValueSet([])));
 
         self::assertInstanceOf(InputValue::class, $value);
     }
@@ -33,7 +34,7 @@ final class OptionalDirectiveTest extends TestCase
         $value = self::getInput()->accept(
             new ConvertRawValueVisitor((object) [], new Path()),
         );
-        $value->applyVariables(new VariableValueSet([]));
+        $value->accept(new ApplyVariablesVisitor(new VariableValueSet([])));
 
         self::assertInstanceOf(InputValue::class, $value);
     }
@@ -46,7 +47,7 @@ final class OptionalDirectiveTest extends TestCase
         $value = self::getInput()->accept(
             new ConvertRawValueVisitor((object) ['arg1' => null], new Path()),
         );
-        $value->applyVariables(new VariableValueSet([]));
+        $value->accept(new ApplyVariablesVisitor(new VariableValueSet([])));
     }
 
     private static function getInput() : InputType

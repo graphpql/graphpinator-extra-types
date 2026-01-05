@@ -12,9 +12,9 @@ use Graphpinator\Typesystem\Field\Field;
 use Graphpinator\Typesystem\Location\FieldDefinitionLocation;
 use Graphpinator\Typesystem\NotNullType;
 use Graphpinator\Value\ArgumentValueSet;
+use Graphpinator\Value\Contract\Value;
 use Graphpinator\Value\FieldValue;
 use Graphpinator\Value\NullValue;
-use Graphpinator\Value\ResolvedValue;
 
 final class NotNullForArgDirective extends Directive implements
     FieldDefinitionLocation
@@ -35,7 +35,7 @@ final class NotNullForArgDirective extends Directive implements
     ) : bool
     {
         // field has argument with given name and has nullable type
-        return $field->getArguments()->offsetExists($arguments->offsetGet('name')->getValue()->getRawValue())
+        return $field->getArguments()->offsetExists($arguments->offsetGet('name')->value->getRawValue())
             && !$field->getType() instanceof NotNullType;
     }
 
@@ -57,7 +57,7 @@ final class NotNullForArgDirective extends Directive implements
     #[\Override]
     public function resolveFieldDefinitionStart(
         ArgumentValueSet $arguments,
-        ResolvedValue $parentValue,
+        Value $parentValue,
     ) : void
     {
         // nothing here
@@ -66,7 +66,7 @@ final class NotNullForArgDirective extends Directive implements
     #[\Override]
     public function resolveFieldDefinitionBefore(
         ArgumentValueSet $arguments,
-        ResolvedValue $parentValue,
+        Value $parentValue,
         ArgumentValueSet $fieldArguments,
     ) : void
     {
@@ -76,7 +76,7 @@ final class NotNullForArgDirective extends Directive implements
     #[\Override]
     public function resolveFieldDefinitionAfter(
         ArgumentValueSet $arguments,
-        ResolvedValue $resolvedValue,
+        Value $resolvedValue,
         ArgumentValueSet $fieldArguments,
     ) : void
     {
@@ -84,9 +84,9 @@ final class NotNullForArgDirective extends Directive implements
             return;
         }
 
-        $argName = $arguments->offsetGet('name')->getValue()->getRawValue();
-        $requiredValue = $arguments->offsetGet('equals')->getValue()->getRawValue();
-        $providedValue = $fieldArguments->offsetGet($argName)->getValue()->getRawValue();
+        $argName = $arguments->offsetGet('name')->value->getRawValue();
+        $requiredValue = $arguments->offsetGet('equals')->value->getRawValue();
+        $providedValue = $fieldArguments->offsetGet($argName)->value->getRawValue();
 
         if ($requiredValue === $providedValue) {
             throw new \Exception();

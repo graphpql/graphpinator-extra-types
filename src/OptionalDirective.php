@@ -46,7 +46,7 @@ final class OptionalDirective extends Directive implements
     #[\Override]
     public function resolveArgumentDefinition(ArgumentValueSet $arguments, ArgumentValue $argumentValue) : void
     {
-        if ($argumentValue->getValue() instanceof NullValue) {
+        if ($argumentValue->value instanceof NullValue) {
             throw new class extends GraphpinatorBase {
                 public const MESSAGE = 'Input field is @optional and therefore cannot contain null value.';
 

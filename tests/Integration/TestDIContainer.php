@@ -232,7 +232,7 @@ final class TestDIContainer
                 return new ResolvableFieldSet([
                     ResolvableField::create(
                         'hslField',
-                        TestDIContainer::getType('Hsl'),
+                        TestDIContainer::getType('Hsl')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -244,7 +244,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'hslaField',
-                        TestDIContainer::getType('Hsla'),
+                        TestDIContainer::getType('Hsla')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -256,7 +256,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'rgbField',
-                        TestDIContainer::getType('Rgb'),
+                        TestDIContainer::getType('Rgb')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -268,7 +268,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'rgbaField',
-                        TestDIContainer::getType('Rgba'),
+                        TestDIContainer::getType('Rgba')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -280,7 +280,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'gpsField',
-                        TestDIContainer::getType('Gps'),
+                        TestDIContainer::getType('Gps')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -292,7 +292,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'pointField',
-                        TestDIContainer::getType('Point'),
+                        TestDIContainer::getType('Point')->notNull(),
                         static function ($parent, Json $input) : \stdClass {
                             return $input->toNative();
                         },
@@ -304,7 +304,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'hslInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
@@ -316,7 +316,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'hslaInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
@@ -328,7 +328,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'rgbInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
@@ -340,7 +340,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'rgbaInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
@@ -352,7 +352,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'gpsInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
@@ -364,7 +364,7 @@ final class TestDIContainer
                     ])),
                     ResolvableField::create(
                         'pointInput',
-                        Container::Int(),
+                        Container::Int()->notNull(),
                         static function ($parent, \stdClass $input) : int {
                             return 1;
                         },
